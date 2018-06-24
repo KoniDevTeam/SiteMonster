@@ -6,8 +6,13 @@ PATH = 'Koni Dev Team/Site Monster/'
 
 
 def save(obj, file):
-    f = open(get_data_folder() + file)
+    f = open(get_data_folder() + file, "w")
     f.write(json.dumps(obj))
+
+
+def read(file):
+    f = open(get_data_folder() + file, "r")
+    return json.loads(f.read())
 
 
 def get_data_folder():
