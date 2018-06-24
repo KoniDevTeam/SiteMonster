@@ -17,12 +17,6 @@ def save_site_list_obj(json_obj):
     file.write(json.dumps(json_obj))
 
 
-def create_user_data_file():
-    file = open('userData.json', 'w')
-    file.write('{\n}')
-    file.close()
-
-
 def get_user_data():
     file = open('userData.json', 'r')
     return json.loads(file)
