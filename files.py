@@ -8,6 +8,7 @@ USER_DATA_FILES = 'userData.json'
 
 BLANK_SITE_LIST = {"sites": []}
 
+
 def get_site_list():
     if os.path.exists(get_data_folder() + SITES_LIST_FILE):
         file = open(get_data_folder() + SITES_LIST_FILE, 'r')
@@ -16,9 +17,9 @@ def get_site_list():
         return BLANK_SITE_LIST
 
 
-def save_site_list_obj(jsonObj):
+def save_site_list_obj(json_obj):
     file = open(get_data_folder() + SITES_LIST_FILE, 'w')
-    file.write(json.dumps(jsonObj))
+    file.write(json.dumps(json_obj))
 
 
 def get_user_data():
@@ -36,7 +37,7 @@ def get_data_folder():
     if 'Windows' in sys:
         return get_data_folder_windows()
     elif 'Linux' in sys:
-        return get_data_foler_linux()
+        return get_data_folder_linux()
     elif 'Darwin' in sys:
         return get_data_folder_macos()
     else:
@@ -57,7 +58,7 @@ def get_data_folder_macos():
     return os.getenv('HOME') + '/Library/Preferences/' + PATH
 
 
-def get_data_foler_linux():
+def get_data_folder_linux():
     """ Returns data folder on Linux. For example: /home/nikita/.Koni Dev Team/Site Monster/'
 
     """
