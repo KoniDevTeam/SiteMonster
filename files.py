@@ -5,13 +5,13 @@ import json
 PATH = 'Koni Dev Team/Site Monster/'
 
 
-def save(obj, file):
-    f = open(get_data_folder() + file, "w")
+def save(obj, filename):
+    f = open(get_data_folder() + filename, "w")
     f.write(json.dumps(obj))
 
 
-def read(file):
-    f = open(get_data_folder() + file, "r")
+def read(filename):
+    f = open(get_data_folder() + filename, "r")
     return json.loads(f.read())
 
 
