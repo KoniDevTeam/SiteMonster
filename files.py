@@ -1,7 +1,13 @@
 import platform
 import os
+import json
 
 PATH = 'Koni Dev Team/Site Monster/'
+
+
+def save(obj, file):
+    f = open(get_data_folder() + file)
+    f.write(json.dumps(obj))
 
 
 def get_data_folder():
