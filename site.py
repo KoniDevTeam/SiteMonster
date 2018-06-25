@@ -39,6 +39,6 @@ def get_list():
     return get_site_list().keys()
 
 
-def build_settings(method, headers, body, proxy, expected_code, expected_answer, sitemap_seatch):
+def build_settings(method, headers, body, proxy, expected_code, expected_answer, sitemap_search):
     return {"method": method, "headers": headers, "body": body, "proxy": proxy, "expected_code": expected_code,
-            "expected_answer": expected_answer, "sitemap_seatch": sitemap_seatch}
+            "expected_answer": expected_answer, "sitemap_search": sitemap_search}
