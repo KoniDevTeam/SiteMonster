@@ -2,6 +2,8 @@ import platform
 import os
 import json
 
+from osinfo import *
+
 PATH = 'Koni Dev Team/Site Monster/'
 
 
@@ -16,15 +18,14 @@ def read(filename):
 
 
 def get_data_folder():
-    sys = platform.system()
-    if 'Windows' in sys:
+    if is_win():
         return get_data_folder_windows()
-    elif 'Linux' in sys:
+    elif is_linux():
         return get_data_folder_linux()
-    elif 'Darwin' in sys:
+    elif is_mac_os():
         return get_data_folder_macos()
     else:
-        raise OSError("Unknown OS: " + sys)
+        raise OSError("Unknown OS: " + platform.system())
 
 
 def get_data_folder_windows():
