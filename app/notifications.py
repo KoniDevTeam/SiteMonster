@@ -27,7 +27,7 @@ def send_linux_notification(message):
         os.system('notify-send "{}" "{}"'.format(appinfo.APP_NAME, message))
 
 
-def send_mac_os_notificaytion(message):
+def send_mac_os_notification(message):
     if not osinfo.is_mac_os():
         raise OSError('MacOS notifications can be sent only from MacOS!')
     if appinfo.APP_ICON is not None:
