@@ -25,3 +25,12 @@ def send_linux_notification(message):
         os.system('notify-send "{}" "{}" -i {}'.format(appinfo.APP_NAME, message, os.path.abspath(appinfo.APP_ICON)))
     else:
         os.system('notify-send "{}" "{}"'.format(appinfo.APP_NAME, message))
+
+
+def send_mac_os_notificaytion(message):
+    if not osinfo.is_mac_os():
+        raise OSError('MacOS notifications can be sent only from MacOS!')
+    if appinfo.APP_ICON is not None:
+        os.system('terminal-notifier -title "{}" -subtitle "" -message "{}" -appIcon "{}"'.format(appinfo.APP_NAME, message, appinfo.APP_ICON))
+    else:
+        os.system('terminal-notifier -title "{}" -subtitle "" -message "{}"'.format(appinfo.APP_NAME, message))
