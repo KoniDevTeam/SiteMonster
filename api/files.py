@@ -1,7 +1,7 @@
 import os
 import json
 
-from osinfo import *
+from api.osinfo import *
 
 PATH = 'Koni Dev Team/Site Monster/'
 
