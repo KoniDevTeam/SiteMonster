@@ -2,7 +2,6 @@
 
 from api import files
 
-
 SITES_LIST_FILE = 'siteList.json'
 
 
@@ -24,11 +23,14 @@ def add(name, url, settings):
     Generate settings dictionary by `build_settings` method.
 
     NameError - if than name already exists.
+
     """
 
     sites = get_sites_list()
+
     if name in sites.keys():
         return NameError("Name already exists.")
+
     sites[name] = {"url": url, "settings": settings}
     save_sites_list(sites)
 
@@ -37,11 +39,14 @@ def delete(name):
     """Remove url from sites list.
 
     NameError - if than name not exists.
+
     """
 
     sites = get_sites_list()
+
     if name not in sites.keys():
         return NameError("Name not exists.")
+
     del sites[name]
     save_sites_list(sites)
 
@@ -50,13 +55,16 @@ def rename(old_name, new_name):
     """Rename url in sites list.
 
     NameError - if new name already exists or old name not exists.
+
     """
 
     sites = get_sites_list()
+
     if old_name not in sites.keys():
-        return NameError("Old name not exists.")
+        return NameError("Old name not Oldexists.")
     if new_name in sites.keys():
         return NameError("New name already exists.")
+
     sites[new_name] = sites.pop(old_name)
     save_sites_list(sites)
 
