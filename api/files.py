@@ -24,7 +24,8 @@ def read(filename):
 def get_data_folder() -> str:
     """Gets data folder.
 
-    For more information see docs for  functions `get_data_folder_windows`, `get_data_folder_macos` and `get_data_folder_linux`.
+    For more information see docs for  functions `get_data_folder_windows`,
+    `get_data_folder_macos` and `get_data_folder_linux`.
 
     """
     if is_win():
