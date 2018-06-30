@@ -1,3 +1,5 @@
+"""Send notification to user."""
+
 import appinfo
 import plyer
 import pyaudio
@@ -5,10 +7,12 @@ import wave
 
 
 def send_notification(message, title):
+    """Send push notification on user's PC"""
     plyer.notification.notify(message=message, app_name=appinfo.APP_NAME, app_icon=appinfo.APP_ICON, title=title)
 
 
 def play_sound():
+    """Plays alarm on user's PC"""
     chunk = 1024
 
     f = wave.open(r"../media/alarm.wav", "rb")
