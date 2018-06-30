@@ -69,6 +69,24 @@ def rename(old_name, new_name):
     save_sites_list(sites)
 
 
+def change_settings(name, settings):
+    """Change url's settings.
+
+    Generate settings dictionary by `build_settings` method.
+
+    NameError - if than name not exists.
+
+    """
+
+    sites = get_sites_list()
+
+    if name not in sites.keys():
+        return NameError("Name not exists.")
+
+    sites[name]["settings"] = settings
+    save_sites_list(sites)
+
+
 def get_list() -> list:
     """Get list of sites' names"""
 
