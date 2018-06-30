@@ -11,13 +11,13 @@ def get_sites_list() -> dict:
     return files.read(SITES_LIST_FILE)
 
 
-def save_sites_list(sites_obj):
+def save_sites_list(sites_obj: object):
     """Save sites list to file."""
 
     files.save(sites_obj, SITES_LIST_FILE)
 
 
-def add(name, url, settings):
+def add(name: str, url: str, settings: dict):
     """Add url to sites list.
 
     Generate settings dictionary by `build_settings` method.
@@ -35,7 +35,7 @@ def add(name, url, settings):
     save_sites_list(sites)
 
 
-def delete(name):
+def delete(name: str):
     """Remove url from sites list.
 
     NameError - if than name not exists.
@@ -51,7 +51,7 @@ def delete(name):
     save_sites_list(sites)
 
 
-def rename(old_name, new_name):
+def rename(old_name: str, new_name: str):
     """Rename url in sites list.
 
     NameError - if new name already exists or old name not exists.
@@ -69,7 +69,7 @@ def rename(old_name, new_name):
     save_sites_list(sites)
 
 
-def change_settings(name, settings):
+def change_settings(name: str, settings: str):
     """Change url's settings.
 
     Generate settings dictionary by `build_settings` method.
@@ -85,17 +85,7 @@ def change_settings(name, settings):
 
     sites[name]["settings"] = settings
     save_sites_list(sites)
-"""Generate settings dictionary.
 
-    method - string, HTTP method which with send request to check website availability.
-    headers - dictionary or NoneType, HTTP request headers.
-    body - string, HTTP request body.
-    proxy - dictionary or NoneType, proxies which will be used to send HTTP request.
-    expected_code - int, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
-    expected_answer - string, expected response body.
-    fail_actions - dict or NoneType, what do if site is unavailable, generate with `build_fail_actions` method.
-
-    """
 
 def get_list() -> list:
     """Get list of sites' names"""

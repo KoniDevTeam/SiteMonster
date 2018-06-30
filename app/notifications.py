@@ -6,7 +6,7 @@ import pyaudio
 import wave
 
 
-def send_notification(message, title):
+def send_notification(message: str, title: str):
     """Send push notification on user's PC"""
     plyer.notification.notify(message=message, app_name=appinfo.APP_NAME, app_icon=appinfo.APP_ICON, title=title)
 

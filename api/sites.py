@@ -3,7 +3,7 @@
 import requests
 
 
-def check(site) -> bool:
+def check(site: dict) -> bool:
     """Check if site is available."""
 
     settings = site['settings']

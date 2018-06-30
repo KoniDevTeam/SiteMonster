@@ -8,14 +8,14 @@ from api.osinfo import *
 PATH = 'Koni Dev Team/Site Monster/'
 
 
-def save(obj, filename):
+def save(obj: object, filename: str):
     """Make a json from obj and save to filename in data folder."""
 
     f = open(get_data_folder() + filename, "w")
     f.write(json.dumps(obj))
 
 
-def read(filename):
+def read(filename: str):
     """Gets json from filename and loads it to dictionary/list."""
     f = open(get_data_folder() + filename, "r")
     return json.loads(f.read())
