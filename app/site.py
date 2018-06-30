@@ -116,6 +116,7 @@ def build_fail_actions(send_notification=True, play_sound=True) -> dict:
 
     send_notifications - bool, if True send push notifications to PC (`send_notification` method in `app/notifications.py`).
     play_sound - bool, if True plays alarm sound on your PC to PC (`play_sound` method in `app/notifications.py`).
+
     """
 
     return {"send_notification": send_notification, "play_sound": play_sound}
