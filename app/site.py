@@ -107,8 +107,8 @@ def build_settings(method='GET', headers=None, body='', proxy=None, expected_cod
 
     """
 
-    return {"method": method, "headers": headers, "body": body, "proxy": proxy, "expected_code": expected_code,
-            "expected_answer": expected_answer, "fail_actions": fail_actions}
+    return {'method': method, 'headers': headers, 'body': body, 'proxy': proxy, 'expected_code': expected_code,
+            'expected_answer': expected_answer, 'fail_actions': fail_actions}
 
 
 def build_fail_actions(send_notification=True, play_sound=True) -> dict:
