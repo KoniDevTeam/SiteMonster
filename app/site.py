@@ -93,16 +93,29 @@ def get_list() -> list:
     return list(get_sites_list().keys())
 
 
-def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=200, expected_answer='') -> dict:
+def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=200, expected_answer='',
+                   fail_actions=None) -> dict:
     """Generate settings dictionary.
 
     method - string, HTTP method which with send request to check website availability.
     headers - dictionary or NoneType, HTTP request headers.
     body - string, HTTP request body.
     proxy - dictionary or NoneType, proxies which will be used to send HTTP request.
-    expected_code - int, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
-    expected_answer - string, expected response body
+    expected_code - int, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+    expected_answer - string, expected response body.
+    fail_actions - dict or NoneType, what do if site is unavailable, generate with `build_fail_actions` method.
+
     """
 
     return {"method": method, "headers": headers, "body": body, "proxy": proxy, "expected_code": expected_code,
-            "expected_answer": expected_answer}
+            "expected_answer": expected_answer, "fail_actions": fail_actions}
+
+
+def build_fail_actions(send_notification=True, play_sound=True) -> dict:
+    """Generate fail actions dictionary.
+
+    send_notifications - bool, if True send push notifications to PC (`send_notification` method in `app/notifications.py`).
+    play_sound - bool, if True plays alarm sound on your PC to PC (`play_sound` method in `app/notifications.py`).
+    """
+
+    return {"send_notification": send_notification, "play_sound": play_sound}
