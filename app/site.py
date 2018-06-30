@@ -93,8 +93,16 @@ def get_list() -> list:
     return list(get_sites_list().keys())
 
 
-def build_settings(method, headers, body, proxy, expected_code, expected_answer, sitemap_search) -> dict:
-    """Generate settings dictionary."""
+def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=200, expected_answer='') -> dict:
+    """Generate settings dictionary.
+
+    method - string, HTTP method which with send request to check website availability.
+    headers - dictionary or NoneType, HTTP request headers.
+    body - string, HTTP request body.
+    proxy - dictionary or NoneType, proxies which will be used to send HTTP request.
+    expected_code - int, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+    expected_answer - string, expected response body
+    """
 
     return {"method": method, "headers": headers, "body": body, "proxy": proxy, "expected_code": expected_code,
-            "expected_answer": expected_answer, "sitemap_search": sitemap_search}
+            "expected_answer": expected_answer}
