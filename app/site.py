@@ -85,17 +85,7 @@ def change_settings(name, settings):
 
     sites[name]["settings"] = settings
     save_sites_list(sites)
-
-
-def get_list() -> list:
-    """Get list of sites' names"""
-
-    return list(get_sites_list().keys())
-
-
-def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=200, expected_answer='',
-                   fail_actions=None) -> dict:
-    """Generate settings dictionary.
+"""Generate settings dictionary.
 
     method - string, HTTP method which with send request to check website availability.
     headers - dictionary or NoneType, HTTP request headers.
@@ -103,6 +93,26 @@ def build_settings(method='GET', headers=None, body='', proxy=None, expected_cod
     proxy - dictionary or NoneType, proxies which will be used to send HTTP request.
     expected_code - int, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
     expected_answer - string, expected response body.
+    fail_actions - dict or NoneType, what do if site is unavailable, generate with `build_fail_actions` method.
+
+    """
+
+def get_list() -> list:
+    """Get list of sites' names"""
+
+    return list(get_sites_list().keys())
+
+
+def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=None, expected_answer=None,
+                   fail_actions=None) -> dict:
+    """Generate settings dictionary.
+
+    method - string, HTTP method which with send request to check website availability.
+    headers - dictionary or NoneType, HTTP request headers.
+    body - string, HTTP request body.
+    proxy - dictionary or NoneType, proxies which will be used to send HTTP request.
+    expected_code - list of int or NoneType, expected HTTP status code (More info: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes), if None - accept any from 200 to 299.
+    expected_answer - string or NoneType, expected response body, if None - accept any.
     fail_actions - dict or NoneType, what do if site is unavailable, generate with `build_fail_actions` method.
 
     """
