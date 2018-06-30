@@ -29,9 +29,9 @@ def add(name, url, settings):
     sites = get_sites_list()
 
     if name in sites.keys():
-        return NameError("Name already exists.")
+        return NameError('Name already exists.')
 
-    sites[name] = {"url": url, "settings": settings}
+    sites[name] = {'url': url, 'settings': settings}
     save_sites_list(sites)
 
 
@@ -45,7 +45,7 @@ def delete(name):
     sites = get_sites_list()
 
     if name not in sites.keys():
-        return NameError("Name not exists.")
+        return NameError('Name not exists.')
 
     del sites[name]
     save_sites_list(sites)
@@ -61,9 +61,9 @@ def rename(old_name, new_name):
     sites = get_sites_list()
 
     if old_name not in sites.keys():
-        return NameError("Old name not Oldexists.")
+        return NameError('Old name not exists.')
     if new_name in sites.keys():
-        return NameError("New name already exists.")
+        return NameError('New name already exists.')
 
     sites[new_name] = sites.pop(old_name)
     save_sites_list(sites)
@@ -81,7 +81,7 @@ def change_settings(name, settings):
     sites = get_sites_list()
 
     if name not in sites.keys():
-        return NameError("Name not exists.")
+        return NameError('Name not exists.')
 
     sites[name]["settings"] = settings
     save_sites_list(sites)
@@ -119,4 +119,4 @@ def build_fail_actions(send_notification=True, play_sound=True) -> dict:
 
     """
 
-    return {"send_notification": send_notification, "play_sound": play_sound}
+    return {'send_notification': send_notification, 'play_sound': play_sound}
