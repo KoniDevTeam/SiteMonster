@@ -17,6 +17,7 @@ def save(obj: object, filename: str):
 
 def read(filename: str):
     """Gets json from filename and loads it to dictionary/list."""
+
     f = open(get_data_folder() + filename, "r")
     return json.loads(f.read())
 
@@ -28,6 +29,7 @@ def get_data_folder() -> str:
     `get_data_folder_macos` and `get_data_folder_linux`.
 
     """
+
     if is_win():
         return get_data_folder_windows()
     elif is_linux():
