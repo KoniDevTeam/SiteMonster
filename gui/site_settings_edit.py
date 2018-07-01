@@ -21,6 +21,12 @@ class SiteSettingsEditWindow(QWidget):
     text_edits = []
 
     def __init__(self, site_name, screen_size):
+        """Init window
+
+        Get screen_size by app.primaryScreen().size() where app is your QApplication
+
+        """
+
         super().__init__()
 
         self.site_name = site_name
