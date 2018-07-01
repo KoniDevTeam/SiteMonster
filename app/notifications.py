@@ -3,6 +3,7 @@
 import wave
 import os
 import sys
+import platform
 
 import pyaudio
 
@@ -13,8 +14,9 @@ import appinfo
 from api import osinfo
 
 
-def send_qt_notification(message: str):
-    """Send qt notification."""
+
+def send_old_windows_notification(message: str):
+    """Show tray popup on old windows."""
 
     app = Qt.QApplication(sys.argv)
     systemtray_icon = None
@@ -24,6 +26,33 @@ def send_qt_notification(message: str):
         systemtray_icon = Qt.QSystemTrayIcon()
     systemtray_icon.show()
     systemtray_icon.showMessage(appinfo.APP_NAME, message)
+
+
+def send_windows_notification(message: str):
+    """Send windows 10 toast notification."""
+
+    if not osinfo.is_win10():
+        raise OSError('Windows toast notifications can be sent only from Windows 10!')
+
+    import win10toast
+
+    toaster = win10toast.ToastNotifier()
+    toaster.show_toast(appinfo.APP_NAME,
+                       message,
+                       icon_path=appinfo.APP_ICON,
+                       duration=5,
+                       threaded=True)
+
+
+def send_linux_notification(message: str):
+    """Send linux libnotify notification."""
+
+    if not osinfo.is_linux():
+        raise OSError('Linux libnotify notifications can be sent only from linux-based OS!')
+    if appinfo.APP_ICON is not None:
+        os.system('notify-send "{}" "{}" -i {}'.format(appinfo.APP_NAME, message, os.path.abspath(appinfo.APP_ICON)))
+    else:
+        os.system('notify-send "{}" "{}"'.format(appinfo.APP_NAME, message))
 
 
 def send_mac_os_notification(message: str):
@@ -40,10 +69,16 @@ def send_mac_os_notification(message: str):
 def send_notification(message):
     """Send push notification to your PC."""
 
-    if osinfo.is_mac_os():
+    if osinfo.is_win10():
+        send_windows_notification(message)
+    elif osinfo.is_win():
+        send_old_windows_notification(message)
+    elif osinfo.is_linux():
+        send_linux_notification(message)
+    elif osinfo.is_mac_os():
         send_mac_os_notification(message)
     else:
-        send_qt_notification(message)
+        raise OSError("Unknown OS: " + platform.system())
 
 
 def play_sound():
