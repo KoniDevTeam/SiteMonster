@@ -1,5 +1,7 @@
 """Edit sites list."""
 
+import os
+
 from api import files
 
 SITES_LIST_FILE = 'siteList.json'
@@ -8,7 +10,10 @@ SITES_LIST_FILE = 'siteList.json'
 def get_sites_list() -> dict:
     """Read sites list from json."""
 
-    return files.read(SITES_LIST_FILE)
+    if os.path.exists(files.get_data_folder() + SITES_LIST_FILE):
+        return files.read(SITES_LIST_FILE)
+    else:
+        return dict()
 
 
 def save_sites_list(sites_obj: object):
@@ -69,7 +74,7 @@ def rename(old_name: str, new_name: str):
     save_sites_list(sites)
 
 
-def change_settings(name: str, settings: str):
+def change_settings(name: str, settings: dict):
     """Change url's settings.
 
     Generate settings dictionary by `build_settings` method.
@@ -106,6 +111,9 @@ def build_settings(method='GET', headers=None, body='', proxy=None, expected_cod
     fail_actions - dict or NoneType, what do if site is unavailable, generate with `build_fail_actions` method.
 
     """
+
+    if fail_actions is None:
+        fail_actions = build_fail_actions()
 
     return {'method': method, 'headers': headers, 'body': body, 'proxy': proxy, 'expected_code': expected_code,
             'expected_answer': expected_answer, 'fail_actions': fail_actions}
