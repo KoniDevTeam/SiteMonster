@@ -10,9 +10,9 @@ import pyaudio
 from PyQt5 import Qt
 
 import appinfo
+import api.files
 
 from api import osinfo
-
 
 
 def send_old_windows_notification(message: str):
@@ -20,7 +20,7 @@ def send_old_windows_notification(message: str):
 
     app = Qt.QApplication(sys.argv)
     systemtray_icon = None
-    if appinfo.APP_ICON is not None:
+    if appinfo.APP_ICON is not None and open(appinfo.APP_ICON):
         systemtray_icon = Qt.QSystemTrayIcon(Qt.QIcon(appinfo.APP_ICON))
     else:
         systemtray_icon = Qt.QSystemTrayIcon()
@@ -61,7 +61,9 @@ def send_mac_os_notification(message: str):
     if not osinfo.is_mac_os():
         raise OSError('MacOS notifications can be sent only from MacOS!')
     if appinfo.APP_ICON is not None:
-        os.system('terminal-notifier -title "{}" -subtitle "" -message "{}" -appIcon "{}"'.format(appinfo.APP_NAME, message, appinfo.APP_ICON))
+        os.system('terminal-notifier -title "{}" -subtitle "" -message "{}" -appIcon "{}"'.format(appinfo.APP_NAME,
+                                                                                                  message,
+                                                                                                  appinfo.APP_ICON))
     else:
         os.system('terminal-notifier -title "{}" -subtitle "" -message "{}"'.format(appinfo.APP_NAME, message))
 
