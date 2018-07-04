@@ -9,10 +9,10 @@ import requests
 
 import appinfo
 
-VERSION_ID_FILE_ON_SERVER = '/Site Monster/version'
-VERSION_NAME_FILE_ON_SERVER = '/Site Monster/version_name'
-VERSION_CHANGELOG_FILE_ON_SERVER = '/Site Monster/changelog'
-UPDATE_FILE_ON_SERVER = '/Site Monster/latest.zip'
+VERSION_ID_FILE_ON_SERVER = '/SiteMonster/version'
+VERSION_NAME_FILE_ON_SERVER = '/SiteMonster/version_name'
+VERSION_CHANGELOG_FILE_ON_SERVER = '/SiteMonster/changelog'
+UPDATE_FILE_ON_SERVER = '/SiteMonster/latest.zip'
 UPDATE_FILE = 'latest.zip'
 BACKUP_FOLDER = 'backup'
 
@@ -150,7 +150,7 @@ class Updater(threading.Thread):
 
         self.status = 'Удаление старой версии...'
 
-        remove_old_installation()
+        #remove_old_installation()
 
         if self.cancel:
             self.status = 'Восстановление старой версии...'
