@@ -5,4 +5,4 @@ APP_ICON = '../media/logo.ico'  # Ну так надо
 APP_VERSION = '1.0'
 APP_VERSION_ID = 0
 
-API_DOMAIN = 'http://localhost'
+API_DOMAIN = 'http://itgrusha.com'

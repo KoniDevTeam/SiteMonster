@@ -10,13 +10,15 @@ import requests
 import appinfo
 
 VERSION_ID_FILE_ON_SERVER = '/Site Monster/version'
+VERSION_NAME_FILE_ON_SERVER = '/Site Monster/version_name'
+VERSION_CHANGELOG_FILE_ON_SERVER = '/Site Monster/changelog'
 UPDATE_FILE_ON_SERVER = '/Site Monster/latest.zip'
 UPDATE_FILE = 'latest.zip'
 BACKUP_FOLDER = 'backup'
 
 
-def get_latest_version_id():
-    """Get id of latest vresion from server."""
+def get_latest_version_id() -> int:
+    """Get id of latest version from server."""
 
     version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER)
 
@@ -24,6 +26,28 @@ def get_latest_version_id():
         raise ConnectionError("Can't get app version, status code - " + str(version_request.status_code))
 
     return int(version_request.text)
+
+
+def get_latest_version_name() -> str:
+    """Get name of latest version from server. (e.g. v1.0)"""
+
+    version_request = requests.get(appinfo.API_DOMAIN + VERSION_NAME_FILE_ON_SERVER)
+
+    if version_request.status_code != 200:
+        raise ConnectionError("Can't get app version name, status code - " + str(version_request.status_code))
+
+    return version_request.text
+
+
+def get_changelog() -> str:
+    """Get changelog from server."""
+
+    changelog_request = requests.get(appinfo.API_DOMAIN + VERSION_CHANGELOG_FILE_ON_SERVER)
+
+    if changelog_request.status_code != 200:
+        raise ConnectionError("Can't get app changelog, status code - " + str(changelog_request.status_code))
+
+    return changelog_request.text
 
 
 def is_up_to_date() -> bool:
@@ -97,6 +121,7 @@ class Updater(threading.Thread):
     """Downloads new version and installs it."""
 
     cancel = False
+    status = 'Начинаем...'
 
     def run(self):
         """Begin updating."""
@@ -104,28 +129,52 @@ class Updater(threading.Thread):
         if is_up_to_date():
             raise ValueError('Already up to date')
 
+        self.status = 'Загрузка обновления...'
+
         download_new_version()
 
         if self.cancel:
+            self.status = 'Удалеие установочных файлов...'
             delete_update_archive()
             return
+
+        self.status = 'Создание резервной копии...'
 
         backup_all()
 
         if self.cancel:
+            self.status = 'Удалеие установочных файлов...'
             delete_update_archive()
             delete_backup_folder()
             return
+
+        self.status = 'Удаление старой версии...'
 
         remove_old_installation()
 
         if self.cancel:
+            self.status = 'Восстановление старой версии...'
             restore_backup()
+            self.status = 'Удалеие установочных файлов...'
             delete_update_archive()
             delete_backup_folder()
             return
 
+        self.status = 'Установка новой версии...'
+
         extract_new_version()
+
+        if self.cancel:
+            self.status = 'Удаление новой версии...'
+            remove_old_installation()
+            self.status = 'Восстановление старой версии...'
+            restore_backup()
+            self.status = 'Удалеие установочных файлов...'
+            delete_update_archive()
+            delete_backup_folder()
+            return
+
+        self.status = 'Удалеие установочных файлов...'
 
         delete_update_archive()
         delete_backup_folder()
