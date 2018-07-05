@@ -19,13 +19,14 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.add_site_btn.clicked.connect(self.add_site_onclick)
 
     def add_site_onclick(self):
-        self.settings_window("Hello", self.size())
-        x, y = self.x(), self.y()
-        h, w = self.height(), self.width()
-        self.settings_window.show()
-        #self.window.hide()
-        #self.settings_window.move(x, y)
-        #self.settings_window.resize(w, h)
+        pass
+        # self.settings_window()
+        # x, y = self.x(), self.y()
+        # h, w = self.height(), self.width()
+        # self.settings_window.show()
+        # self.window.hide()
+        # self.settings_window.move(x, y)
+        # self.settings_window.resize(w, h)
 
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
