@@ -132,4 +132,4 @@ class SiteSettingsEditWindow(QWidget):
         close_btn.clicked.connect(self.save_all)
         grid.addWidget(close_btn, 9, 1)
 
-        #self.show()
+        self.show()
