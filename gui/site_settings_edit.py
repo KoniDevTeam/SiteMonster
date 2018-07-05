@@ -45,8 +45,9 @@ class SiteSettingsEditWindow(QWidget):
                                                  proxy,
                                                  list(int(i) for i in self.text_edits[5].text().split(',')),
                                                  self.text_edits[6].text(),
-                                                 site.build_fail_actions(self.text_edits[7].isChecked(), self.text_edits[8].isChecked()))
-        )
+                                                 site.build_fail_actions(self.text_edits[7].isChecked(),
+                                                                         self.text_edits[8].isChecked()))
+                             )
 
     def initUI(self):
         """Create and setup gui elements."""
@@ -131,4 +132,4 @@ class SiteSettingsEditWindow(QWidget):
         close_btn.clicked.connect(self.save_all)
         grid.addWidget(close_btn, 9, 1)
 
-        self.show()
+        #self.show()
