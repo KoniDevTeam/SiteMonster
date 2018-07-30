@@ -54,7 +54,10 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                            self.http_codes, self.expected, self.notification, self.sound]
 
     def exit(self):
-        self.close()
+        if QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+                                               QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No) ==\
+                QtWidgets.QMessageBox.Yes:
+            self.close()
 
     def save_all(self):
         proxy = None
@@ -71,7 +74,7 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                                                  site.build_fail_actions(self.text_edits[7].isChecked(),
                                                                          self.text_edits[8].isChecked()))
                              )
-        self.exit()
+        self.close()
 
 
 class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
