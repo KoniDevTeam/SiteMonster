@@ -14,9 +14,9 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
         self.quit.clicked.connect(self.exit)
         self.save.clicked.connect(self.save_all)
 
-        self.site_name = data["site_name"]
+        self.site_name = data['site_name']
         self.setWindowTitle('Settings: ' + self.site_name)
-        self.header.setText(self.header.text().replace("[SITENAME]", self.site_name))
+        self.header.setText(self.header.text().replace('[SITENAME]', self.site_name))
 
         website = site.get_sites_list()[self.site_name]
 
@@ -54,7 +54,7 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                            self.http_codes, self.expected, self.notification, self.sound]
 
     def exit(self):
-        if QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+        if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No) ==\
                 QtWidgets.QMessageBox.Yes:
             self.close()
@@ -89,22 +89,22 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
             if self.name.text() not in site.get_sites_list().keys():
                 if len(self.url.text()) > 2:
                     site.add(self.name.text(), self.url.text(), site.build_settings())
-                    self.settings_window = SiteSettings({"site_name": self.name.text()})
+                    self.settings_window = SiteSettings({'site_name': self.name.text()})
                     geometry = self.geometry()
                     self.settings_window.setGeometry(geometry)
                     self.settings_window.show()
                     self.hide()
             else:
-                QtWidgets.QMessageBox.information(self, "Message", "Name must be unique",
+                QtWidgets.QMessageBox.information(self, 'Message', 'Name must be unique',
                                                   QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
         else:
-           QtWidgets.QMessageBox.information(self, "Message", "Name must be at least 4 characters long",
+           QtWidgets.QMessageBox.information(self, 'Message', 'Name must be at least 4 characters long',
                                               QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
 
         # self.closeEvent()
 
     def closeEvent(self, event):
-        reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+        reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
             event.accept()
@@ -150,7 +150,7 @@ class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
         self.close()
 
     def closeEvent(self, event):
-        reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+        reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
             event.accept()
