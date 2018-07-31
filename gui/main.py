@@ -2,7 +2,7 @@ import sys, json
 from app import site
 from PyQt5 import QtWidgets
 import gui.ui.welcome as design
-from gui.ui import monitor, site_settings
+from gui.ui import monitor, site_settings, addsite
 from PyQt5.QtCore import QCoreApplication
 
 
@@ -77,6 +77,44 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
         self.close()
 
 
+class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.cancel.clicked.connect(self.quit)
+        self.continue_btn.clicked.connect(self.continue_f)
+
+    def continue_f(self):
+        if len(self.name.text()) > 3:
+            if self.name.text() not in site.get_sites_list().keys():
+                if len(self.url.text()) > 2:
+                    site.add(self.name.text(), self.url.text(), site.build_settings())
+                    self.settings_window = SiteSettings({"site_name": self.name.text()})
+                    geometry = self.geometry()
+                    self.settings_window.setGeometry(geometry)
+                    self.settings_window.show()
+                    self.hide()
+            else:
+                QtWidgets.QMessageBox.information(self, "Message", "Name must be unique",
+                                                  QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
+        else:
+           QtWidgets.QMessageBox.information(self, "Message", "Name must be at least 4 characters long",
+                                              QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
+
+        # self.closeEvent()
+
+    def closeEvent(self, event):
+        reply = QtWidgets.QMessageBox.question(self, 'Message', "Are you sure to quit?", QtWidgets.QMessageBox.Yes |
+                                               QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+    def quit(self):
+        self.close()
+
+
 class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def __init__(self):
         super().__init__()
@@ -85,13 +123,11 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
 
     def add_site_onclick(self):
         # pass
-        self.settings_window = SiteSettings({"site_name": "itgrusha.com"})
-        x, y = self.x(), self.y()
-        size = self.size()
-        self.settings_window.show()
+        self.site_add_wnd = SiteAdd()
+        geometry = self.geometry()
+        self.site_add_wnd.show()
         self.hide()
-        self.settings_window.move(x, y)
-        self.settings_window.resize(size)
+        self.site_add_wnd.setGeometry(geometry)
 
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
