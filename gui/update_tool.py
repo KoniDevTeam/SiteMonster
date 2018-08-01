@@ -19,7 +19,6 @@ class UpdateToolWindow(QWidget):
 
     def check(self):
         """Update status label."""
-        print(self.updater)
         if self.updater is not None:
             self.statusLabel.setText(self.updater.status)
 

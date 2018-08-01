@@ -50,9 +50,9 @@ def send_linux_notification(message: str):
     if not osinfo.is_linux():
         raise OSError('Linux libnotify notifications can be sent only from linux-based OS!')
     if appinfo.APP_ICON is not None:
-        os.system('notify-send "{}" "{}" -i {}'.format(appinfo.APP_NAME, message, os.path.abspath(appinfo.APP_ICON)))
+        os.system('notify-send "{}" "{}" --icon="{}" --expire-time=30000'.format(appinfo.APP_NAME, message, os.path.abspath(appinfo.APP_ICON)))
     else:
-        os.system('notify-send "{}" "{}"'.format(appinfo.APP_NAME, message))
+        os.system('notify-send "{}" "{}" --expire-time=30000'.format(appinfo.APP_NAME, message))
 
 
 def send_mac_os_notification(message: str):

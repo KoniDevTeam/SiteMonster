@@ -150,7 +150,7 @@ class Updater(threading.Thread):
 
         self.status = 'Удаление старой версии...'
 
-        #remove_old_installation()
+        remove_old_installation()
 
         if self.cancel:
             self.status = 'Восстановление старой версии...'
