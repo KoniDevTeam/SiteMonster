@@ -7,8 +7,8 @@ from api import files
 SITES_LIST_FILE = 'siteList.json'
 
 
-def get_sites_list() -> dict:
-    """Read sites list from json."""
+def get_sites_dict() -> dict:
+    """Read sites and sites' properties to dict from json."""
 
     if os.path.exists(files.get_data_folder() + SITES_LIST_FILE):
         return files.read(SITES_LIST_FILE)
@@ -16,7 +16,7 @@ def get_sites_list() -> dict:
         return dict()
 
 
-def save_sites_list(sites_obj: object):
+def save_sites_list(sites_obj: dict):
     """Save sites list to file."""
 
     files.save(sites_obj, SITES_LIST_FILE)
@@ -31,10 +31,10 @@ def add(name: str, url: str, settings: dict):
 
     """
 
-    sites = get_sites_list()
+    sites = get_sites_dict()
 
     if name in sites.keys():
-        return NameError('Name already exists.')
+        raise NameError('Name already exists.')
 
     sites[name] = {'url': url, 'settings': settings}
     save_sites_list(sites)
@@ -47,10 +47,10 @@ def delete(name: str):
 
     """
 
-    sites = get_sites_list()
+    sites = get_sites_dict()
 
     if name not in sites.keys():
-        return NameError('Name not exists.')
+        raise NameError('Name not exists.')
 
     del sites[name]
     save_sites_list(sites)
@@ -63,12 +63,12 @@ def rename(old_name: str, new_name: str):
 
     """
 
-    sites = get_sites_list()
+    sites = get_sites_dict()
 
     if old_name not in sites.keys():
-        return NameError('Old name not exists.')
+        raise NameError('Old name not exists.')
     if new_name in sites.keys():
-        return NameError('New name already exists.')
+        raise NameError('New name already exists.')
 
     sites[new_name] = sites.pop(old_name)
     save_sites_list(sites)
@@ -83,10 +83,10 @@ def change_settings(name: str, settings: dict):
 
     """
 
-    sites = get_sites_list()
+    sites = get_sites_dict()
 
     if name not in sites.keys():
-        return NameError('Name not exists.')
+        raise NameError('Name not exists.')
 
     sites[name]["settings"] = settings
     save_sites_list(sites)
@@ -95,7 +95,7 @@ def change_settings(name: str, settings: dict):
 def get_list() -> list:
     """Get list of sites' names"""
 
-    return list(get_sites_list().keys())
+    return list(get_sites_dict().keys())
 
 
 def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=None, expected_answer=None,

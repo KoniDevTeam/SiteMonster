@@ -59,7 +59,7 @@ class SiteSettingsEditWindow(QWidget):
         self.setWindowIcon(QIcon(appinfo.APP_ICON))
         self.setMinimumHeight(400)
 
-        website = site.get_sites_list()[self.site_name]
+        website = site.get_sites_dict()[self.site_name]
 
         test1 = QLabel('Как заполнять: <тут на докуменацию ссылка>', self)
         test1.setGeometry(0, 0, 1000, 20)

@@ -18,7 +18,7 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
         self.setWindowTitle('Settings: ' + self.site_name)
         self.header.setText(self.header.text().replace('[SITENAME]', self.site_name))
 
-        website = site.get_sites_list()[self.site_name]
+        website = site.get_sites_dict()[self.site_name]
 
         text = website['settings']['method']
         self.http_method.setText(text)
@@ -86,7 +86,7 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
 
     def continue_f(self):
         if len(self.name.text()) > 3:
-            if self.name.text() not in site.get_sites_list().keys():
+            if self.name.text() not in site.get_sites_dict().keys():
                 if len(self.url.text()) > 2:
                     site.add(self.name.text(), self.url.text(), site.build_settings())
                     self.settings_window = SiteSettings({'site_name': self.name.text()})
