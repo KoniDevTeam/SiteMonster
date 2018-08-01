@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QWidget, QLineEdit, QLabel, QGridLayout, QCheckBox, 
 from PyQt5.QtGui import QIcon
 
 import appinfo
-
 from app import site
 
 
