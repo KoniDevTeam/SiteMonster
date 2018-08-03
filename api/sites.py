@@ -25,8 +25,8 @@ def check(site: dict) -> bool:
         logging.info("Can't send request to " + site['url'])
         return False
 
-    if not is_status_code_good(settings['expected_codes'], r.status_code):
-        logging.info("Invalid response's status code: expected " + str(settings['expected_codes']) + ', got ' + str(
+    if not is_status_code_good(settings['expected_code'], r.status_code):
+        logging.info("Invalid response's status code: expected " + str(settings['expected_code']) + ', got ' + str(
             r.status_code))
         return False
 
