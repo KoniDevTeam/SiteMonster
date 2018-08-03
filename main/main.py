@@ -170,6 +170,6 @@ def main():
 
 
 if __name__ == '__main__':
-    osinfo.init_log()
+    osinfo.init_log('app')
     osinfo.log_pc_info()
     main()

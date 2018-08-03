@@ -7,7 +7,7 @@ import app.site as site
 import app.notifications as notify
 
 if __name__ == '__main__':
-    osinfo.init_log("daemon")
+    osinfo.init_log('daemon')
     osinfo.log_pc_info()
     while True:
         sites_dict = site.get_sites_dict()
