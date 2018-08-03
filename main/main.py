@@ -1,9 +1,11 @@
-import sys, json
-from app import site
+import sys
+import json
+
 from PyQt5 import QtWidgets
-import gui.ui.welcome as design
+
+from app import site
 from gui.ui import monitor, site_settings, addsite
-from PyQt5.QtCore import QCoreApplication
+import gui.ui.welcome as design
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
