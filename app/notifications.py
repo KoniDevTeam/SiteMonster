@@ -4,19 +4,21 @@ import wave
 import os
 import sys
 import platform
+import logging
 
 import pyaudio
 
 from PyQt5 import Qt
 
 import appinfo
-import api.files
 
 from api import osinfo
 
 
 def send_old_windows_notification(message: str):
     """Show tray popup on old windows."""
+
+    logging.debug('Sending olf windows tray notification')
 
     app = Qt.QApplication(sys.argv)
     systemtray_icon = None
@@ -31,7 +33,10 @@ def send_old_windows_notification(message: str):
 def send_windows_notification(message: str):
     """Send windows 10 toast notification."""
 
+    logging.debug('Sending windows 10 toast notification')
+
     if not osinfo.is_win10():
+        logging.error('Trying to send win10 notification not from win10!')
         raise OSError('Windows toast notifications can be sent only from Windows 10!')
 
     import win10toast
@@ -47,7 +52,10 @@ def send_windows_notification(message: str):
 def send_linux_notification(message: str):
     """Send linux libnotify notification."""
 
+    logging.debug('Sending linux libnotify notification')
+
     if not osinfo.is_linux():
+        logging.error('Trying to send linux notification not from linux!')
         raise OSError('Linux libnotify notifications can be sent only from linux-based OS!')
     if appinfo.APP_ICON is not None:
         os.system('notify-send "{}" "{}" --icon="{}" --expire-time=30000'.format(appinfo.APP_NAME, message, os.path.abspath(appinfo.APP_ICON)))
@@ -58,7 +66,10 @@ def send_linux_notification(message: str):
 def send_mac_os_notification(message: str):
     """Send macOS push notification."""
 
+    logging.debug('Sending macos push notification')
+
     if not osinfo.is_mac_os():
+        logging.error('Trying to send macOS notification not from macOS!')
         raise OSError('MacOS notifications can be sent only from MacOS!')
     if appinfo.APP_ICON is not None:
         os.system('terminal-notifier -title "{}" -subtitle "" -message "{}" -appIcon "{}"'.format(appinfo.APP_NAME,
@@ -70,6 +81,8 @@ def send_mac_os_notification(message: str):
 
 def send_notification(message):
     """Send push notification to your PC."""
+
+    logging.info('Sending notification')
 
     if osinfo.is_win10():
         send_windows_notification(message)
@@ -86,6 +99,8 @@ def send_notification(message):
 def play_sound():
     """Plays alarm on user's PC"""
     chunk = 1024
+
+    logging.info('Playing sound')
 
     f = wave.open(r"../media/alarm.wav", "rb")
     p = pyaudio.PyAudio()

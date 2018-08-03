@@ -1,10 +1,14 @@
 """Actions with websites."""
 
+import logging
+
 import requests
 
 
 def check(site: dict) -> bool:
     """Check if site is available."""
+
+    logging.info('Checking ' + site['url'])
 
     settings = site['settings']
 
@@ -17,8 +21,20 @@ def check(site: dict) -> bool:
     except Exception:
         success = False
 
-    return success and is_status_code_good(settings["expected_codes"], r.status_code) and is_answer_good(
-        settings["expected_answer"], r.text)
+    if not success:
+        logging.info("Can't send request to " + site['url'])
+        return False
+
+    if not is_status_code_good(settings['expected_codes'], r.status_code):
+        logging.info("Invalid response's status code: expected " + str(settings['expected_codes']) + ', got ' + str(
+            r.status_code))
+        return False
+
+    if not is_answer_good(settings['expected_answer'], r.text):
+        logging.info("Invalid server's response: expected" + str(settings['expected_answer']) + ', got ' + r.text)
+        return False
+
+    return True
 
 
 def is_status_code_good(expected_codes: list, status_code: int) -> bool:
