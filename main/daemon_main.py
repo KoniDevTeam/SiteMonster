@@ -1,7 +1,7 @@
 import time
+import logging
 
 from api import osinfo
-
 import api.sites as sites
 import app.site as site
 import app.notifications as notify
@@ -14,6 +14,7 @@ if __name__ == '__main__':
         for i, j in sites_dict.items():
             if not sites.check(j):
                 if j['settings']['fail_actions']['send_notification']:
+                    logging.warning('Site %s is down!!!' % i)
                     notify.send_notification('Site %s is down!!!' % i)
                 if j['settings']['fail_actions']['play_sound']:
                     notify.play_sound()

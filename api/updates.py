@@ -3,6 +3,7 @@
 import os
 import shutil
 import threading
+import logging
 from zipfile import ZipFile
 
 import requests
@@ -20,9 +21,12 @@ BACKUP_FOLDER = 'backup'
 def get_latest_version_id() -> int:
     """Get id of latest version from server."""
 
+    logging.info("Getting latest version's id id from server")
+
     version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER)
 
     if version_request.status_code != 200:
+        logging.error("Can't get app version, status code - " + str(version_request.status_code))
         raise ConnectionError("Can't get app version, status code - " + str(version_request.status_code))
 
     return int(version_request.text)
@@ -31,9 +35,12 @@ def get_latest_version_id() -> int:
 def get_latest_version_name() -> str:
     """Get name of latest version from server. (e.g. v1.0)"""
 
+    logging.info("Getting latest version's name id from server")
+
     version_request = requests.get(appinfo.API_DOMAIN + VERSION_NAME_FILE_ON_SERVER)
 
     if version_request.status_code != 200:
+        logging.error("Can't get app version name, status code - " + str(version_request.status_code))
         raise ConnectionError("Can't get app version name, status code - " + str(version_request.status_code))
 
     return version_request.text
@@ -42,9 +49,12 @@ def get_latest_version_name() -> str:
 def get_changelog() -> str:
     """Get changelog from server."""
 
+    logging.info("Getting changelog from server")
+
     changelog_request = requests.get(appinfo.API_DOMAIN + VERSION_CHANGELOG_FILE_ON_SERVER)
 
     if changelog_request.status_code != 200:
+        logging.error("Can't get app changelog, status code - " + str(changelog_request.status_code))
         raise ConnectionError("Can't get app changelog, status code - " + str(changelog_request.status_code))
 
     return changelog_request.text
@@ -53,11 +63,17 @@ def get_changelog() -> str:
 def is_up_to_date() -> bool:
     """Check if newest version is installed."""
 
-    return get_latest_version_id() == appinfo.APP_VERSION_ID
+    if get_latest_version_id() == appinfo.APP_VERSION_ID:
+        logging.info('App is up to date!')
+        return True
+    else:
+        logging.warning('App is not up to date!')
 
 
 def download_new_version():
     """Download zip of latest version from server."""
+
+    logging.info('Downloading new app version binaries')
 
     update_file = open(UPDATE_FILE, 'wb')
 
@@ -68,6 +84,8 @@ def download_new_version():
 
 def backup_all():
     """Backup app files."""
+
+    logging.info('Making an backup')
 
     if not os.path.exists(BACKUP_FOLDER):
         os.makedirs(BACKUP_FOLDER)
@@ -83,6 +101,8 @@ def backup_all():
 def remove_old_installation():
     """Remove old files."""
 
+    logging.info('Removing old app installation')
+
     for file in os.listdir('.'):
         if BACKUP_FOLDER not in file:
             if os.path.isdir(file):
@@ -94,6 +114,8 @@ def remove_old_installation():
 def extract_new_version():
     """Extract files from archive."""
 
+    logging.info('Unzipping new version')
+
     update_file = ZipFile(UPDATE_FILE, 'r')
     update_file.extractall('.')
     update_file.close()
@@ -101,6 +123,8 @@ def extract_new_version():
 
 def restore_backup():
     """Copy files from backup to folder."""
+
+    logging.info('Restoring from last backup')
 
     for file in os.listdir(BACKUP_FOLDER):
         if os.path.isdir(BACKUP_FOLDER + '/' + file):
@@ -110,10 +134,12 @@ def restore_backup():
 
 
 def delete_update_archive():
+    logging.debug('Removing update archive')
     os.remove(UPDATE_FILE)
 
 
 def delete_backup_folder():
+    logging.debug('Removing backup')
     shutil.rmtree(BACKUP_FOLDER)
 
 
@@ -123,10 +149,13 @@ class Updater(threading.Thread):
     cancel = False
     status = 'Начинаем...'
 
+    logging.info("Update started")
+
     def run(self):
         """Begin updating."""
 
         if is_up_to_date():
+            logging.critical('Already up to date')
             raise ValueError('Already up to date')
 
         self.status = 'Загрузка обновления...'
@@ -134,6 +163,7 @@ class Updater(threading.Thread):
         download_new_version()
 
         if self.cancel:
+            logging.info('Canceling update')
             self.status = 'Удалеие установочных файлов...'
             delete_update_archive()
             return
@@ -143,6 +173,7 @@ class Updater(threading.Thread):
         backup_all()
 
         if self.cancel:
+            logging.info('Canceling update')
             self.status = 'Удалеие установочных файлов...'
             delete_update_archive()
             delete_backup_folder()
@@ -153,6 +184,7 @@ class Updater(threading.Thread):
         remove_old_installation()
 
         if self.cancel:
+            logging.info('Canceling update')
             self.status = 'Восстановление старой версии...'
             restore_backup()
             self.status = 'Удалеие установочных файлов...'
@@ -165,6 +197,7 @@ class Updater(threading.Thread):
         extract_new_version()
 
         if self.cancel:
+            logging.info('Canceling update')
             self.status = 'Удаление новой версии...'
             remove_old_installation()
             self.status = 'Восстановление старой версии...'
@@ -174,7 +207,11 @@ class Updater(threading.Thread):
             delete_backup_folder()
             return
 
+        logging.info('Update finished')
+
         self.status = 'Удалеие установочных файлов...'
 
         delete_update_archive()
         delete_backup_folder()
+
+        logging.info('Cleaned, exiting from thread')

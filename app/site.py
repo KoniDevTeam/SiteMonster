@@ -1,6 +1,7 @@
 """Edit sites list."""
 
 import os
+import logging
 
 from api import files
 
@@ -10,6 +11,8 @@ SITES_LIST_FILE = 'siteList.json'
 def get_sites_dict() -> dict:
     """Read sites and sites' properties to dict from json."""
 
+    logging.info('Getting dict with lists of websites')
+
     if os.path.exists(files.get_data_folder() + SITES_LIST_FILE):
         return files.read(SITES_LIST_FILE)
     else:
@@ -18,6 +21,8 @@ def get_sites_dict() -> dict:
 
 def save_sites_list(sites_obj: dict):
     """Save sites list to file."""
+
+    logging.info("Saving websites")
 
     files.save(sites_obj, SITES_LIST_FILE)
 
@@ -31,9 +36,12 @@ def add(name: str, url: str, settings: dict):
 
     """
 
+    logging.info('Adding new website ' + name + '<' + url + '>')
+
     sites = get_sites_dict()
 
     if name in sites.keys():
+        logging.error('Name already exists')
         raise NameError('Name already exists.')
 
     sites[name] = {'url': url, 'settings': settings}
@@ -47,9 +55,12 @@ def delete(name: str):
 
     """
 
+    logging.info('Deleting website ' + name)
+
     sites = get_sites_dict()
 
     if name not in sites.keys():
+        logging.error('Name not exists')
         raise NameError('Name not exists.')
 
     del sites[name]
@@ -63,11 +74,15 @@ def rename(old_name: str, new_name: str):
 
     """
 
+    logging.info('Renaming website ' + old_name + ' to ' + new_name)
+
     sites = get_sites_dict()
 
     if old_name not in sites.keys():
+        logging.error('old name not exists')
         raise NameError('Old name not exists.')
     if new_name in sites.keys():
+        logging.error('New name already exists')
         raise NameError('New name already exists.')
 
     sites[new_name] = sites.pop(old_name)
@@ -83,17 +98,21 @@ def change_settings(name: str, settings: dict):
 
     """
 
+    logging.info('Changing ' + name + "'s settings")
+
     sites = get_sites_dict()
 
     if name not in sites.keys():
         raise NameError('Name not exists.')
 
-    sites[name]["settings"] = settings
+    sites[name]['settings'] = settings
     save_sites_list(sites)
 
 
 def get_list() -> list:
     """Get list of sites' names"""
+
+    logging.info("Getting ist of sites' names")
 
     return list(get_sites_dict().keys())
 
@@ -112,6 +131,8 @@ def build_settings(method='GET', headers=None, body='', proxy=None, expected_cod
 
     """
 
+    logging.debug('Generating settings dict')
+
     if fail_actions is None:
         fail_actions = build_fail_actions()
 
@@ -126,5 +147,7 @@ def build_fail_actions(send_notification=True, play_sound=True) -> dict:
     play_sound - bool, if True plays alarm sound on your PC to PC (`play_sound` method in `app/notifications.py`).
 
     """
+
+    logging.debug('Generating fail_actions dict')
 
     return {'send_notification': send_notification, 'play_sound': play_sound}
