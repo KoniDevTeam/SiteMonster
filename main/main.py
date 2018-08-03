@@ -1,11 +1,13 @@
 import sys
 import json
+import logging
 
 from PyQt5 import QtWidgets
 
+import gui.ui.welcome as design
 from app import site
 from gui.ui import monitor, site_settings, addsite
-import gui.ui.welcome as design
+from api import files
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
@@ -168,4 +170,8 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format=u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
+                        level=logging.DEBUG)
+    logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s',
+                        level=logging.DEBUG, filename=files.get_data_folder() + 'latest.log')
     main()
