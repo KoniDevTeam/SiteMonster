@@ -1,18 +1,20 @@
 import sys
 import json
-import logging
 
 from PyQt5 import QtWidgets
+from PyQt5 import QtGui
+from PyQt5 import QtCore
 
 import gui.ui.welcome as design
 from app import site
 from gui.ui import monitor, site_settings, addsite
-from api import files
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
-    def __init__(self, data={}):
+    def __init__(self, data=None):
         super().__init__()
+        if data is None:
+            data = {}
         self.setupUi(self)
 
         self.quit.clicked.connect(self.exit)
@@ -58,8 +60,9 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                            self.http_codes, self.expected, self.notification, self.sound]
 
     def exit(self):
-        if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
-                                               QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No) ==\
+        if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?',
+                                          QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                          QtWidgets.QMessageBox.No) ==\
                 QtWidgets.QMessageBox.Yes:
             self.close()
 
@@ -102,13 +105,13 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
                 QtWidgets.QMessageBox.information(self, 'Message', 'Name must be unique',
                                                   QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
         else:
-           QtWidgets.QMessageBox.information(self, 'Message', 'Name must be at least 4 characters long',
+            QtWidgets.QMessageBox.information(self, 'Message', 'Name must be at least 4 characters long',
                                               QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
 
         # self.closeEvent()
 
     def closeEvent(self, event):
-        reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
+        reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to cancel?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
             event.accept()
@@ -123,15 +126,43 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.fav_btn_example.hide()
+        if site.get_sites_dict().keys().__len__() > 0:
+            sites = site.get_sites_dict()
+            for key in sites:
+                print(key)
+                self.fav_sites = QtWidgets.QPushButton(self.fav_container_)
+                self.fav_container.addWidget(self.fav_sites)
+                self.fav_sites.setObjectName(key)
+
+                self.fav_sites.setToolTip(key)
+                self.fav_sites.setToolTipDuration(20 * 100)
+
+                icon = QtGui.QIcon()
+                icon.addPixmap(QtGui.QPixmap("../media/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+                self.fav_sites.setIcon(icon)
+                self.fav_sites.setIconSize(QtCore.QSize(24, 24))
+                self.fav_sites.setMaximumSize(QtCore.QSize(256, 32))
+                self.fav_sites.clicked.connect(self.get_site_info(key))
+                # self.fav_sites.setText(key)
+
+                self.fav_container.addWidget(self.fav_sites)
+            self.add_site_btn.hide()
+            self.message_label.setText("Select site from list or Favourites")
+
         self.add_site_btn.clicked.connect(self.add_site_onclick)
 
     def add_site_onclick(self):
-        # pass
         self.site_add_wnd = SiteAdd()
         geometry = self.geometry()
         self.site_add_wnd.show()
-        self.hide()
         self.site_add_wnd.setGeometry(geometry)
+
+    def get_site_info(self, name: str):
+        self.message_label.hide()
+
 
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
@@ -170,8 +201,4 @@ def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(format=u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
-                        level=logging.DEBUG)
-    logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s',
-                        level=logging.DEBUG, filename=files.get_data_folder() + 'latest.log')
     main()

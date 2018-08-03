@@ -22,7 +22,7 @@ def save_sites_list(sites_obj: dict):
     files.save(sites_obj, SITES_LIST_FILE)
 
 
-def add(name: str, url: str, settings: dict):
+def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = 'logo.ico'):
     """Add url to sites list.
 
     Generate settings dictionary by `build_settings` method.
@@ -36,7 +36,7 @@ def add(name: str, url: str, settings: dict):
     if name in sites.keys():
         raise NameError('Name already exists.')
 
-    sites[name] = {'url': url, 'settings': settings}
+    sites[name] = {'url': url, 'settings': settings, 'favourite': favourite, 'favicon': favicon}
     save_sites_list(sites)
 
 
