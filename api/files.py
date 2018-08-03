@@ -2,6 +2,7 @@
 
 import os
 import json
+import logging
 
 from api.osinfo import *
 
@@ -14,7 +15,10 @@ def get_data_folder_windows() -> str:
     For example: `C://Users/Nikita/AppData/Roaming/Koni Dev Team/Site Monster/`.
 
     """
-    return os.getenv('APPDATA') + '/' + PATH
+
+    path = os.getenv('APPDATA') + '/' + PATH
+    logging.debug("Got windows folder: " + path)
+    return path
 
 
 def get_data_folder_macos() -> str:
@@ -23,7 +27,10 @@ def get_data_folder_macos() -> str:
     For example: `/User/nikita/Library/Preferences/Koni Dev Team/Site Monster/`.
 
     """
-    return os.getenv('HOME') + '/Library/Preferences/' + PATH
+
+    path = os.getenv('HOME') + '/Library/Preferences/' + PATH
+    logging.debug("Got macOS folder: " + path)
+    return path
 
 
 def get_data_folder_linux() -> str:
@@ -32,7 +39,10 @@ def get_data_folder_linux() -> str:
     For example: `/home/nikita/.Koni Dev Team/Site Monster/`.
 
     """
-    return os.getenv('HOME') + '/.' + PATH
+
+    path = os.getenv('HOME') + '/.' + PATH
+    logging.debug("Got linux folder: " + path)
+    return path
 
 
 def get_data_folder() -> str:
@@ -42,6 +52,8 @@ def get_data_folder() -> str:
     `get_data_folder_macos` and `get_data_folder_linux`.
 
     """
+
+    logging.debug("Getting user's data folder")
 
     if is_win():
         return get_data_folder_windows()
@@ -56,12 +68,16 @@ def get_data_folder() -> str:
 def save(obj: object, filename: str):
     """Make a json from obj and save to filename in data folder."""
 
+    logging.debug("Saving ", obj, ' to ' + filename)
+
     f = open(get_data_folder() + filename, "w")
     f.write(json.dumps(obj))
 
 
 def read(filename: str):
     """Gets json from filename and loads it to dictionary/list."""
+
+    logging.debug('Reading object from ' + filename)
 
     f = open(get_data_folder() + filename, "r")
     return json.loads(f.read())
