@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 import gui.ui.welcome as design
 from app import site
 from gui.ui import monitor, site_settings, addsite
-from api import files
+from api import osinfo
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
@@ -170,8 +170,6 @@ def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(format=u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
-                        level=logging.DEBUG)
-    logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s',
-                        level=logging.DEBUG, filename=files.get_data_folder() + 'latest.log')
+    osinfo.init_log()
+    osinfo.log_pc_info()
     main()
