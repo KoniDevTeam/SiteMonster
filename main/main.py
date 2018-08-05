@@ -184,7 +184,6 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def menu_onclick(self):
         state: bool = not self.menu_btn.property('state')
         self.menu_btn.setProperty('state', state)
-        # print('Hell`o')
         tmp: int = 2
         if state:
             self.fav_only_checkbox.show()
@@ -194,7 +193,6 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             if tmp > 0:
                 tmp -= 1
                 continue
-            # print(fav_site.objectName())
             if state:
                 fav_site.setText(fav_site.objectName())
             else:
