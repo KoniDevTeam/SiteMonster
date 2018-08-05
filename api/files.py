@@ -68,10 +68,11 @@ def get_data_folder() -> str:
 def save(obj: object, filename: str):
     """Make a json from obj and save to filename in data folder."""
 
-    logging.debug("Saving ", obj, ' to ' + filename)
+    logging.debug("Saving " + str(obj) + ' to ' + filename)
 
     f = open(get_data_folder() + filename, "w")
     f.write(json.dumps(obj))
+    f.close()
 
 
 def read(filename: str):
@@ -80,4 +81,9 @@ def read(filename: str):
     logging.debug('Reading object from ' + filename)
 
     f = open(get_data_folder() + filename, "r")
-    return json.loads(f.read())
+
+    obj = json.loads(f.read())
+
+    f.close()
+
+    return obj
