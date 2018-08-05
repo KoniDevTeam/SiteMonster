@@ -58,6 +58,7 @@ class Ui_Dialog(object):
         icon1.addPixmap(QtGui.QPixmap("../media/filter.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.fav_only_checkbox.setIcon(icon1)
         self.fav_only_checkbox.setIconSize(QtCore.QSize(24, 24))
+        self.fav_only_checkbox.setChecked(True)
         self.fav_only_checkbox.setObjectName("fav_only_checkbox")
         self.menu_vert.addWidget(self.fav_only_checkbox)
         self.fav_container_ = QtWidgets.QWidget(self.menu_vert_)
