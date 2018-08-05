@@ -80,4 +80,9 @@ def read(filename: str):
     logging.debug('Reading object from ' + filename)
 
     f = open(get_data_folder() + filename, "r")
-    return json.loads(f.read())
+
+    obj = json.loads(f.read())
+
+    f.close()
+
+    return obj
