@@ -207,7 +207,6 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                 tmp -= 1
                 continue
             if not self.sites[siteobj.objectName()]["favourite"]:
-                print(siteobj.objectName())
                 if state:
                     siteobj.hide()
                 else:
