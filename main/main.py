@@ -4,9 +4,9 @@ import logging
 
 from PyQt5 import QtWidgets
 
-import gui.ui.welcome as design
 from app import site
 from gui.ui import monitor, site_settings, addsite
+import gui.ui.welcome as design
 from api import osinfo
 
 
