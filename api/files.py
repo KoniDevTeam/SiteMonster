@@ -72,6 +72,7 @@ def save(obj: object, filename: str):
 
     f = open(get_data_folder() + filename, "w")
     f.write(json.dumps(obj))
+    f.close()
 
 
 def read(filename: str):
