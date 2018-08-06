@@ -5,10 +5,11 @@ from api import osinfo
 import api.sites as sites
 import app.site as site
 import app.notifications as notify
+from app import logger
 
 if __name__ == '__main__':
-    osinfo.init_log('daemon')
-    osinfo.log_pc_info()
+    logger.init_log('daemon')
+    logger.log_pc_info()
     while True:
         sites_dict = site.get_sites_dict()
         for i, j in sites_dict.items():

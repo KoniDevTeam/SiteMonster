@@ -12,6 +12,7 @@ from app import site
 from api import sites, osinfo, updates
 from gui.ui import monitor, site_settings, addsite
 import gui.ui.welcome as design
+from app import logger
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
@@ -301,7 +302,7 @@ def main():
 
 
 if __name__ == '__main__':
-    osinfo.init_log('app')
-    osinfo.log_pc_info()
+    logger.init_log('app')
+    logger.log_pc_info()
     logging.info('Starting app')
     main()

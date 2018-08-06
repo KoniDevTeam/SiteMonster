@@ -4,7 +4,7 @@ import os
 import json
 import logging
 
-from api.osinfo import *
+from api.osinfo import is_win, is_linux, is_mac_os
 
 PATH = 'Koni Dev Team/Site Monster/'
 
