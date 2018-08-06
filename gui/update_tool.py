@@ -14,8 +14,8 @@ class UpdateToolWindow(QWidget):
     updater = None
     statusLabel = None
 
-    WINDOW_WIDTH = 800
-    WINDOW_HEIGHT = 500
+    WINDOW_WIDTH = 555
+    WINDOW_HEIGHT = 430
 
     def check(self):
         """Update status label."""
