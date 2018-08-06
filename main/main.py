@@ -279,18 +279,28 @@ def set_wnd_icon(self, ico):
 def test_for_update():
     try:
         if not updates.is_up_to_date():
-            buttonReply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available', "Do you want to install new update now?",
-                                                         QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-            if buttonReply == QtWidgets.QMessageBox.Yes:
-                if osinfo.is_win():
-                    subprocess.Popen(["updater.exe"])
-                elif osinfo.is_linux():
-                    subprocess.Popen(["updater"])
-                else:
-                    raise OSError(platform.system() + 'is not supported!')
+            if ask_user_for_update():
+                run_updater()
                 exit(0)
     except Exception as e:
         logging.error("Can't check for updates: " + str(e))
+
+
+def ask_user_for_update() -> bool:
+    buttonReply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available',
+                                                 "Do you want to install new update now?",
+                                                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+    return buttonReply == QtWidgets.QMessageBox.Yes
+
+
+def run_updater():
+    if osinfo.is_win():
+        subprocess.Popen(["updater.exe"])
+    elif osinfo.is_linux():
+        subprocess.Popen(["updater"])
+    else:
+        raise OSError(platform.system() + 'is not supported!')
 
 
 def main():
