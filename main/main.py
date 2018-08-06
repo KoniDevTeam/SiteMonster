@@ -1,16 +1,17 @@
+import logging
 import sys
 import json
-import logging
+import subprocess
+import platform
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 
 from app import site
-from api import sites
+from api import sites, osinfo, updates
 from gui.ui import monitor, site_settings, addsite
 import gui.ui.welcome as design
-from api import osinfo
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
@@ -241,8 +242,26 @@ class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
             event.ignore()
 
 
+def test_for_update():
+    try:
+        if not updates.is_up_to_date():
+            buttonReply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available', "Do you want to install new update now?",
+                                                         QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            if buttonReply == QtWidgets.QMessageBox.Yes:
+                if osinfo.is_win():
+                    subprocess.Popen(["updater.exe"])
+                elif osinfo.is_linux():
+                    subprocess.Popen(["updater"])
+                else:
+                    raise OSError(platform.system() + 'is not supported!')
+                exit(0)
+    except Exception as e:
+        logging.error("Can't check for updates: " + str(e))
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    test_for_update()
     window = SiteMonster()
     window.show()
     sys.exit(app.exec_())

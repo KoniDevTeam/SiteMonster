@@ -149,10 +149,10 @@ class Updater(threading.Thread):
     cancel = False
     status = 'Начинаем...'
 
-    logging.info("Update started")
-
     def run(self):
         """Begin updating."""
+
+        logging.info("Update started")
 
         if is_up_to_date():
             logging.critical('Already up to date')
