@@ -1,7 +1,6 @@
 import time
 import logging
 
-from api import osinfo
 import api.sites as sites
 import app.site as site
 import app.notifications as notify

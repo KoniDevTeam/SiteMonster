@@ -4,7 +4,6 @@ import logging
 from PyQt5.QtWidgets import QApplication
 
 from gui.update_tool import UpdateToolWindow
-from api import osinfo
 from app import logger
 
 if __name__ == '__main__':
