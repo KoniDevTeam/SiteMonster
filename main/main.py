@@ -10,12 +10,11 @@ from PyQt5 import QtGui
 from PyQt5 import QtCore
 import psutil
 
-from app import site
+import appinfo
+import gui.ui.welcome as design
+from app import site, logger
 from api import sites, osinfo, updates
 from gui.ui import monitor, site_settings, addsite
-import gui.ui.welcome as design
-from app import logger
-import appinfo
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):

@@ -2,11 +2,9 @@ import time
 import logging
 import os
 
-import api.sites as sites
-import app.site as site
 import app.notifications as notify
-from app import logger
-from api import osinfo
+from app import logger, site
+from api import osinfo, sites
 
 
 def save_pid():

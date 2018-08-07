@@ -1,6 +1,6 @@
 """App info."""
 
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel
 from PyQt5.QtGui import QIcon, QFont
 
 import appinfo

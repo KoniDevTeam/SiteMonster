@@ -7,11 +7,9 @@ import platform
 import logging
 
 import pyaudio
-
 from PyQt5 import Qt
 
 import appinfo
-
 from api import osinfo
 
 
