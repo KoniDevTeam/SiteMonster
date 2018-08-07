@@ -13,6 +13,7 @@ from api import sites, osinfo, updates
 from gui.ui import monitor, site_settings, addsite
 import gui.ui.welcome as design
 from app import logger
+import appinfo
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
@@ -96,7 +97,7 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
 
-        self.setWindowTitle('SiteMonster - add site')
+        self.setWindowTitle(appinfo.APP_NAME + ' - add site')
         set_wnd_icon(self, 'plus.png')
 
         self.cancel.clicked.connect(self.quit)
@@ -138,7 +139,7 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
 
-        self.setWindowTitle('SiteMonster - Monitor')
+        self.setWindowTitle(appinfo.APP_NAME + ' - Monitor')
         set_wnd_icon(self, 'logo.ico')
 
         self.fav_btn_example.hide()
@@ -287,11 +288,11 @@ def test_for_update():
 
 
 def ask_user_for_update() -> bool:
-    buttonReply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available',
+    button_reply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available',
                                                  "Do you want to install new update now?",
                                                  QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
 
-    return buttonReply == QtWidgets.QMessageBox.Yes
+    return button_reply == QtWidgets.QMessageBox.Yes
 
 
 def run_updater():
