@@ -4,6 +4,9 @@ import platform
 import logging
 
 
+PID_FILE = 'daemon_pid.tmp'
+
+
 def is_win10() -> bool:
     is_win_10 = is_win() and '10' in platform.release()
     logging.debug("Checking for windows 10 -" + str(is_win_10))

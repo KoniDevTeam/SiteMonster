@@ -3,10 +3,12 @@ import sys
 import json
 import subprocess
 import platform
+import os
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
+import psutil
 
 from app import site
 from api import sites, osinfo, updates
@@ -277,6 +279,40 @@ def set_wnd_icon(self, ico):
     self.setWindowIcon(icon)
 
 
+def run(name: str):
+    if osinfo.is_win():
+        subprocess.Popen([name + '.exe'])
+    elif osinfo.is_linux():
+        subprocess.Popen([name])
+    else:
+        raise OSError(platform.system() + 'is not supported!')
+
+
+def run_daemon():
+    try:
+        run('daemon')
+    except Exception as e:
+        logging.error("Can't start daemon: " + str(e))
+
+
+def run_daemon_if_it_is_not_running():
+    if not os.path.exists(osinfo.PID_FILE):
+        run_daemon()
+    else:
+        try:
+            f = open(osinfo.PID_FILE, 'r')
+
+            pid = int(f.read().strip())
+
+            f.close()
+
+            if not psutil.pid_exists(pid):
+                run_daemon()
+        except Exception as e:
+            logging.error("Can't check pid file of daemon: " + str(e))
+            run_daemon()
+
+
 def test_for_update():
     try:
         if not updates.is_up_to_date():
@@ -296,12 +332,7 @@ def ask_user_for_update() -> bool:
 
 
 def run_updater():
-    if osinfo.is_win():
-        subprocess.Popen(["updater.exe"])
-    elif osinfo.is_linux():
-        subprocess.Popen(["updater"])
-    else:
-        raise OSError(platform.system() + 'is not supported!')
+    run('updater')
 
 
 def main():
@@ -316,4 +347,5 @@ if __name__ == '__main__':
     logger.init_log('app')
     logger.log_pc_info()
     logging.info('Starting app')
+    run_daemon_if_it_is_not_running()
     main()

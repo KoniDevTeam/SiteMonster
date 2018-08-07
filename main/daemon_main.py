@@ -6,13 +6,11 @@ import api.sites as sites
 import app.site as site
 import app.notifications as notify
 from app import logger
-
-
-PID_FILE = 'daemon_pid.tmp'
+from api import osinfo
 
 
 def save_pid():
-    f = open(PID_FILE, 'w')
+    f = open(osinfo.PID_FILE, 'w')
     f.write(str(os.getpid()))
     f.close()
 
