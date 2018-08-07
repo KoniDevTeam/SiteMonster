@@ -3,6 +3,7 @@
 import os
 import json
 import logging
+import platform
 
 from api.osinfo import is_win, is_linux, is_mac_os
 
