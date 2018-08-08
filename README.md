@@ -34,6 +34,8 @@ def check(site: dict) -> bool:
 * Before starting pull request, run all unit tests to make sure that you did not break anything.
 * Add your name to list of contributors in end of this file.
 ## License
+![GNU GPL v3 logo](https://www.gnu.org/graphics/gplv3-127x51.png)
+
 Site Monster is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
