@@ -38,6 +38,9 @@ from gui.ui import monitor, site_settings, addsite
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
     def __init__(self, data=None):
         super().__init__()
+
+        logging.info('Starting setting window for ' + data['site_name'])
+
         if data is None:
             data = {}
         self.setupUi(self)
@@ -87,6 +90,8 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                            self.http_codes, self.expected, self.notification, self.sound]
 
     def exit(self):
+        logging.info('Closing setting window for' + self.site_name)
+
         if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?',
                                           QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
                                           QtWidgets.QMessageBox.No) ==\
@@ -114,6 +119,9 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
 class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
     def __init__(self):
         super().__init__()
+
+        logging.info('Starting "add new site" window')
+
         self.setupUi(self)
 
         self.setWindowTitle(appinfo.APP_NAME + ' - add site')
@@ -142,6 +150,7 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
         # self.closeEvent()
 
     def closeEvent(self, event):
+        logging.debug('Running close event for "add new site" window')
         reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to cancel?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
@@ -150,6 +159,7 @@ class SiteAdd(QtWidgets.QDialog, addsite.Ui_Dialog):
             event.ignore()
 
     def quit(self):
+        logging.info('Closing "add new site" window')
         self.close()
 
 
@@ -157,6 +167,8 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        logging.info('Starting monitor window')
 
         self.setWindowTitle(appinfo.APP_NAME + ' - Monitor')
         set_wnd_icon(self, 'logo.ico')
@@ -260,6 +272,7 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
     def __init__(self):
+        logging.info('Starting welcome window')
         super().__init__()
         self.setupUi(self)
 
@@ -279,9 +292,11 @@ class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
         self.window.resize(size)
 
     def quit(self):
+        logging.info('Closing welcome window')
         self.close()
 
     def closeEvent(self, event):
+        logging.debug('Running close event for welcome window')
         reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
@@ -297,6 +312,7 @@ def set_wnd_icon(self, ico):
 
 
 def run(name: str):
+    logging.debug('Running ' + name)
     if osinfo.is_win():
         subprocess.Popen([name + '.exe'])
     elif osinfo.is_linux():

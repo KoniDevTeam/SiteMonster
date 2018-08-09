@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
+
 from PyQt5.QtWidgets import QWidget, QLabel
 from PyQt5.QtGui import QIcon, QFont
 
@@ -37,6 +39,8 @@ class InfoWindow(QWidget):
         Get screen_size by app.primaryScreen().size() where app is your QApplication
 
         """
+
+        logging.info('Starting info window')
 
         super().__init__()
 

@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
+
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTimer
@@ -48,6 +50,8 @@ class UpdateToolWindow(QWidget):
 
         """
 
+        logging.info('Starting update tool window')
+
         super().__init__()
 
         self.screen_size = screen_size
@@ -68,6 +72,8 @@ class UpdateToolWindow(QWidget):
 
     def cancel(self):
         """Cancel updating."""
+
+        logging.debug('Canceling update')
 
         if self.updater is not None:
             self.updater.cancel = True
