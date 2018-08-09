@@ -109,6 +109,16 @@ def change_settings(name: str, settings: dict):
     save_sites_list(sites)
 
 
+def set_favourite(name: str, favourite: bool):
+    sites = get_sites_dict()
+
+    if name not in sites.keys():
+        raise NameError('Name not exists.')
+
+    sites[name]['favourite'] = favourite
+    save_sites_list(sites)
+
+
 def get_list() -> list:
     """Get list of sites' names"""
 

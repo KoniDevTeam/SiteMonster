@@ -58,11 +58,16 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
             text = ''
         self.expected.setText(text)
 
+        text = website['favourite']
+        if text is None:
+            text = False
+        self.favourite.setChecked(text)
+
         self.notification.setChecked(website['settings']['fail_actions']['send_notification'])
         self.sound.setChecked(website['settings']['fail_actions']['play_sound'])
 
         self.text_edits = [self.http_method, self.http_headers, self.http_body, self.http_proxy, self.https_proxy,
-                           self.http_codes, self.expected, self.notification, self.sound]
+                           self.http_codes, self.expected, self.notification, self.sound, self.favourite]
 
     def exit(self):
         if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?',
@@ -86,6 +91,8 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                                                  site.build_fail_actions(self.text_edits[7].isChecked(),
                                                                          self.text_edits[8].isChecked()))
                              )
+        site.set_favourite(self.site_name, self.text_edits[9].isChecked())
+
         self.close()
 
 
@@ -144,6 +151,7 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.fav_only_checkbox.hide()
         self.settings_btn.hide()
         self.site_settings.hide()
+        self.delete_site.hide()
 
         if site.get_sites_dict().keys().__len__() > 0:
             self.sites = site.get_sites_dict()
@@ -178,6 +186,7 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.menu_btn.clicked.connect(self.menu_onclick)
         self.fav_only_checkbox.stateChanged.connect(self.filter)
         self.site_settings.clicked.connect(self.site_settings_onclick)
+        self.delete_site.clicked.connect(self.site_delete)
 
     def add_site_onclick(self):
         self.site_add_wnd = SiteAdd()
@@ -195,12 +204,16 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             self.status.setText("OK" if sites.check(self.sites[name]) else "OOPS")
             self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.site_settings.show()
+            self.delete_site.show()
 
         return get_site_info
 
     def menu_onclick(self):
+        # print(self.menu_btn.dynamicPropertyNames())
+
         state: bool = not self.menu_btn.property('state')
         self.menu_btn.setProperty('state', state)
+
         tmp: int = 2
         if state:
             self.fav_only_checkbox.show()
@@ -234,6 +247,19 @@ class Monitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.settings = SiteSettings({'site_name': self.site})
         self.settings.setGeometry(geometry)
         self.settings.show()
+
+    def site_delete(self):
+        name = self.site
+        if QtWidgets.QMessageBox().question(self, 'Really', 'Are you sure to delete ' + name + '?',
+                                            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                            QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes:
+            site.delete(name)
+        geometry = self.geometry()
+        self.wnd = Monitor()
+        self.wnd.setGeometry(geometry)
+        self.wnd.show()
+        self.close()
+    # def event
 
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):

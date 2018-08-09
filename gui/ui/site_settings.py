@@ -21,13 +21,6 @@ class Ui_Dialog(object):
         self.formLayout_2.setHorizontalSpacing(12)
         self.formLayout_2.setVerticalSpacing(8)
         self.formLayout_2.setObjectName("formLayout_2")
-        self.header = QtWidgets.QLabel(Dialog)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(20)
-        self.header.setFont(font)
-        self.header.setObjectName("header")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.header)
         self.line = QtWidgets.QFrame(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -150,7 +143,7 @@ class Ui_Dialog(object):
         self.notification.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.notification.setIconSize(QtCore.QSize(20, 20))
         self.notification.setObjectName("notification")
-        self.formLayout_2.setWidget(11, QtWidgets.QFormLayout.SpanningRole, self.notification)
+        self.formLayout_2.setWidget(12, QtWidgets.QFormLayout.SpanningRole, self.notification)
         self.sound = QtWidgets.QCheckBox(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -164,7 +157,39 @@ class Ui_Dialog(object):
         self.sound.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.sound.setIconSize(QtCore.QSize(20, 20))
         self.sound.setObjectName("sound")
-        self.formLayout_2.setWidget(12, QtWidgets.QFormLayout.SpanningRole, self.sound)
+        self.formLayout_2.setWidget(13, QtWidgets.QFormLayout.SpanningRole, self.sound)
+        self.favourite = QtWidgets.QCheckBox(Dialog)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.favourite.setFont(font)
+        self.favourite.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.favourite.setStyleSheet("QCheckBox {\n"
+"    color: \"red\";\n"
+"} \n"
+"QCheckBox::indicator {\n"
+"    width: 24px;\n"
+"    height: 24px;\n"
+"}\n"
+"QCheckBox::indicator:unchecked {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off.png);\n"
+"} \n"
+"QCheckBox::indicator:unchecked:hover {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off-hover.png);\n"
+"} \n"
+"QCheckBox::indicator:unchecked:pressed {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off-pressed.png);\n"
+"}\n"
+"QCheckBox::indicator:checked {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:hover {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on-hover.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:pressed {\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on-pressed.png);\n"
+"}")
+        self.favourite.setObjectName("favourite")
+        self.formLayout_2.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.favourite)
         self.widget = QtWidgets.QWidget(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -206,7 +231,20 @@ class Ui_Dialog(object):
         self.quit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.quit.setObjectName("quit")
         self.horizontalLayout.addWidget(self.quit)
-        self.formLayout_2.setWidget(13, QtWidgets.QFormLayout.SpanningRole, self.widget)
+        self.formLayout_2.setWidget(16, QtWidgets.QFormLayout.SpanningRole, self.widget)
+        self.header = QtWidgets.QLabel(Dialog)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(20)
+        self.header.setFont(font)
+        self.header.setObjectName("header")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.header)
+        self.label = QtWidgets.QLabel(Dialog)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.LabelRole, self.label)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -224,7 +262,6 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.header.setText(_translate("Dialog", "Settings - [SITENAME]"))
         self.http_method_label.setText(_translate("Dialog", "HTTP method"))
         self.http_headers_label.setText(_translate("Dialog", "HTTP headers"))
         self.http_body_label.setText(_translate("Dialog", "HTTP request body"))
@@ -234,6 +271,9 @@ class Ui_Dialog(object):
         self.expected_lable.setText(_translate("Dialog", "Expected server response"))
         self.notification.setText(_translate("Dialog", "Send notification if server not responding"))
         self.sound.setText(_translate("Dialog", "Play sound if server not responding"))
+        self.favourite.setText(_translate("Dialog", "Favourite"))
         self.save.setText(_translate("Dialog", "Save settings and quit"))
         self.quit.setText(_translate("Dialog", "Quit without saving"))
+        self.header.setText(_translate("Dialog", "Settings - [SITENAME]"))
+        self.label.setText(_translate("Dialog", "Icon"))
 
