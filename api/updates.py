@@ -176,58 +176,58 @@ class Updater(threading.Thread):
             logging.critical('Already up to date')
             raise ValueError('Already up to date')
 
-        self.status = 'Загрузка обновления...'
+        self.status = 'Downloading update...'
 
         download_new_version()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             return
 
-        self.status = 'Создание резервной копии...'
+        self.status = 'Creating backup...'
 
         backup_all()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
-        self.status = 'Удаление старой версии...'
+        self.status = 'Removing old installation...'
 
         remove_old_installation()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Восстановление старой версии...'
+            self.status = 'Restoring old version...'
             restore_backup()
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
-        self.status = 'Установка новой версии...'
+        self.status = 'Installing new update...'
 
         extract_new_version()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удаление новой версии...'
+            self.status = 'Removing update files...'
             remove_old_installation()
-            self.status = 'Восстановление старой версии...'
+            self.status = 'Restoring old version...'
             restore_backup()
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
         logging.info('Update finished')
 
-        self.status = 'Удалеие установочных файлов...'
+        self.status = 'Removing update files...'
 
         delete_update_archive()
         delete_backup_folder()
