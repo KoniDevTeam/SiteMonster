@@ -41,7 +41,7 @@ def get_latest_version_id() -> int:
 
     logging.info("Getting latest version's id id from server")
 
-    version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER)
+    version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER, timeout=3)
 
     if version_request.status_code != 200:
         logging.error("Can't get app version, status code - " + str(version_request.status_code))
