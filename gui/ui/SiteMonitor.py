@@ -1,0 +1,130 @@
+from PyQt5 import QtWidgets, QtCore
+from gui.ui import monitor
+from gui.ui.SiteAdd import SiteAdd
+from gui.ui.SiteSettings import SiteSettings
+from api.gui import *
+from api import sites
+from app import site
+
+
+class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+
+        self.setWindowTitle('SiteMonster - SiteMonitor')
+        set_wnd_icon(self, 'logo.ico')
+
+        self.fav_btn_example.hide()
+        self.description_.hide()
+        self.fav_only_checkbox.hide()
+        self.settings_btn.hide()
+        self.site_settings.hide()
+        self.delete_site.hide()
+
+        if site.get_sites_dict().keys().__len__() > 0:
+            self.sites = site.get_sites_dict()
+            for key in self.sites:
+                if True:
+                    self.fav_sites = QtWidgets.QPushButton(self.fav_container_)
+                    self.fav_container.addWidget(self.fav_sites)
+                    self.fav_sites.setObjectName(key)
+
+                    self.fav_sites.setToolTip(key)
+                    self.fav_sites.setToolTipDuration(20 * 100)
+
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("../media/" + (self.sites[key]['favicon']
+                                                 if (not self.sites[key]['favicon'] is None) else "logo.ico")),
+                                   QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+                    self.fav_sites.setIcon(icon)
+                    self.fav_sites.setIconSize(QtCore.QSize(24, 24))
+                    self.fav_sites.setMaximumSize(QtCore.QSize(256, 32))
+                    self.fav_sites.clicked.connect(self.make_get_site_info(key))
+                    # self.fav_sites.setText(key)
+
+                    self.fav_container.addWidget(self.fav_sites)
+                    if not self.sites[key]['favourite']:
+                        self.fav_sites.hide()
+            self.add_site_btn.hide()
+            self.message_label.setText("Select site from list.")
+
+        self.add_site_btn.clicked.connect(self.add_site_onclick)
+        self.plus_site.clicked.connect(self.add_site_onclick)
+        self.menu_btn.clicked.connect(self.menu_onclick)
+        self.fav_only_checkbox.stateChanged.connect(self.filter)
+        self.site_settings.clicked.connect(self.site_settings_onclick)
+        self.delete_site.clicked.connect(self.site_delete)
+
+    def add_site_onclick(self):
+        self.site_add_wnd = SiteAdd()
+        geometry = self.geometry()
+        self.site_add_wnd.show()
+        self.site_add_wnd.setGeometry(geometry)
+
+    def make_get_site_info(self, name: str):
+        def get_site_info():
+            self.site = name
+            self.message_label.setText('Info about [SITENAME]'.replace('[SITENAME]', name))
+            self.description_.show()
+            self.url.setText(self.sites[name]['url'])
+            self.setCursor(QtGui.QCursor(QtCore.Qt.BusyCursor))
+            self.status.setText("OK" if sites.check(self.sites[name]) else "OOPS")
+            self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            self.site_settings.show()
+            self.delete_site.show()
+
+        return get_site_info
+
+    def menu_onclick(self):
+        # print(self.menu_btn.dynamicPropertyNames())
+
+        state: bool = not self.menu_btn.property('state')
+        self.menu_btn.setProperty('state', state)
+
+        tmp: int = 2
+        if state:
+            self.fav_only_checkbox.show()
+        else:
+            self.fav_only_checkbox.hide()
+        for fav_site in self.fav_container_.children():
+            if tmp > 0:
+                tmp -= 1
+                continue
+            if state:
+                fav_site.setText(fav_site.objectName())
+            else:
+                fav_site.setText('')
+                # self.fav_container.removeWidget(fav_site)  # terrible thing
+
+    def filter(self):
+        state = self.fav_only_checkbox.checkState()
+        tmp: int = 2
+        for siteobj in self.fav_container_.children():
+            if tmp > 0:
+                tmp -= 1
+                continue
+            if not self.sites[siteobj.objectName()]["favourite"]:
+                if state:
+                    siteobj.hide()
+                else:
+                    siteobj.show()
+
+    def site_settings_onclick(self):
+        geometry = self.geometry()
+        self.settings = SiteSettings({'site_name': self.site})
+        self.settings.setGeometry(geometry)
+        self.settings.show()
+
+    def site_delete(self):
+        name = self.site
+        if QtWidgets.QMessageBox().question(self, 'Really', 'Are you sure to delete ' + name + '?',
+                                            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                            QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes:
+            site.delete(name)
+        geometry = self.geometry()
+        self.wnd = SiteMonitor()
+        self.wnd.setGeometry(geometry)
+        self.wnd.show()
+        self.close()
