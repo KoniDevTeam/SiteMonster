@@ -76,9 +76,10 @@ def test_for_update():
 
 
 def ask_user_for_update() -> bool:
-    button_reply = QtWidgets.QMessageBox.question(QtWidgets.QWidget(), 'New update available',
-                                                 "Do you want to install new update now?",
-                                                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    button_reply = QtWidgets.QMessageBox.question(QtWidgets.QMessageBox(), 'New update is available',
+                                                  'Do you want to install new update now?',
+                                                  QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                                  QtWidgets.QMessageBox.No)
 
     return button_reply == QtWidgets.QMessageBox.Yes
 
