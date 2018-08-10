@@ -19,7 +19,7 @@
 import sys
 import os
 import psutil
-import logger
+from app import logger
 import logging
 import platform
 import subprocess
