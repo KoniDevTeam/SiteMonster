@@ -1,5 +1,23 @@
 """App update tool."""
 
+# Copyright (C) 2018 Koni Dev Team, All Rights Reserved
+# https://github.com/KoniDevTeam/SiteMonster/
+#
+# This file is part of Site Monster.
+#
+# Site Monster is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Site Monster is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
 import shutil
 import threading
@@ -23,7 +41,7 @@ def get_latest_version_id() -> int:
 
     logging.info("Getting latest version's id id from server")
 
-    version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER)
+    version_request = requests.get(appinfo.API_DOMAIN + VERSION_ID_FILE_ON_SERVER, timeout=3)
 
     if version_request.status_code != 200:
         logging.error("Can't get app version, status code - " + str(version_request.status_code))
@@ -149,67 +167,67 @@ class Updater(threading.Thread):
     cancel = False
     status = 'Начинаем...'
 
-    logging.info("Update started")
-
     def run(self):
         """Begin updating."""
+
+        logging.info("Update started")
 
         if is_up_to_date():
             logging.critical('Already up to date')
             raise ValueError('Already up to date')
 
-        self.status = 'Загрузка обновления...'
+        self.status = 'Downloading update...'
 
         download_new_version()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             return
 
-        self.status = 'Создание резервной копии...'
+        self.status = 'Creating backup...'
 
         backup_all()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
-        self.status = 'Удаление старой версии...'
+        self.status = 'Removing old installation...'
 
         remove_old_installation()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Восстановление старой версии...'
+            self.status = 'Restoring old version...'
             restore_backup()
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
-        self.status = 'Установка новой версии...'
+        self.status = 'Installing new update...'
 
         extract_new_version()
 
         if self.cancel:
             logging.info('Canceling update')
-            self.status = 'Удаление новой версии...'
+            self.status = 'Removing update files...'
             remove_old_installation()
-            self.status = 'Восстановление старой версии...'
+            self.status = 'Restoring old version...'
             restore_backup()
-            self.status = 'Удалеие установочных файлов...'
+            self.status = 'Removing update files...'
             delete_update_archive()
             delete_backup_folder()
             return
 
         logging.info('Update finished')
 
-        self.status = 'Удалеие установочных файлов...'
+        self.status = 'Removing update files...'
 
         delete_update_archive()
         delete_backup_folder()

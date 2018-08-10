@@ -1,10 +1,29 @@
 """Work with user's filesystem."""
 
+# Copyright (C) 2018 Koni Dev Team, All Rights Reserved
+# https://github.com/KoniDevTeam/SiteMonster/
+#
+# This file is part of Site Monster.
+#
+# Site Monster is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Site Monster is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
 import json
 import logging
+import platform
 
-from api.osinfo import *
+from api.osinfo import is_win, is_linux, is_mac_os
 
 PATH = 'Koni Dev Team/Site Monster/'
 

@@ -1,4 +1,25 @@
 """App info."""
+
+# Copyright (C) 2018 Koni Dev Team, All Rights Reserved
+# https://github.com/KoniDevTeam/SiteMonster/
+#
+# This file is part of Site Monster.
+#
+# Site Monster is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Site Monster is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+
+import logging
+
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTimer
@@ -14,8 +35,8 @@ class UpdateToolWindow(QWidget):
     updater = None
     statusLabel = None
 
-    WINDOW_WIDTH = 800
-    WINDOW_HEIGHT = 500
+    WINDOW_WIDTH = 555
+    WINDOW_HEIGHT = 430
 
     def check(self):
         """Update status label."""
@@ -28,6 +49,8 @@ class UpdateToolWindow(QWidget):
         Get screen_size by app.primaryScreen().size() where app is your QApplication
 
         """
+
+        logging.info('Starting update tool window')
 
         super().__init__()
 
@@ -50,6 +73,8 @@ class UpdateToolWindow(QWidget):
     def cancel(self):
         """Cancel updating."""
 
+        logging.debug('Canceling update')
+
         if self.updater is not None:
             self.updater.cancel = True
 
@@ -62,24 +87,24 @@ class UpdateToolWindow(QWidget):
         self.setWindowIcon(QIcon(appinfo.APP_ICON))
         self.setFixedSize(self.size())
 
-        version_label = QLabel('Ваша версия: ' + appinfo.APP_VERSION, self)
+        version_label = QLabel('App version: ' + appinfo.APP_VERSION, self)
         version_label.setGeometry(30, 30, 120, 40)
 
-        new_version_label = QLabel('Дотсупная версия: ' + updates.get_latest_version_name(), self)
+        new_version_label = QLabel('New version: ' + updates.get_latest_version_name(), self)
         new_version_label.setGeometry(30, 90, 160, 40)
 
-        changelog_label = QLabel('В новой версии: \n' + updates.get_changelog(), self)
+        changelog_label = QLabel("What's new: \n" + updates.get_changelog(), self)
         changelog_label.setGeometry(300, 10, 200, 250)
 
         status_label = QLabel('', self)
         status_label.setGeometry(30, 150, 120, 40)
         self.statusLabel = status_label
 
-        start_btn = QPushButton('Установить', self)
+        start_btn = QPushButton('Install', self)
         start_btn.clicked.connect(self.begin)
         start_btn.setGeometry(30, 300, 200, 100)
 
-        cancel_btn = QPushButton('Отменить', self)
+        cancel_btn = QPushButton('Cancel', self)
         cancel_btn.clicked.connect(self.cancel)
         cancel_btn.setGeometry(330, 300, 200, 100)
 
