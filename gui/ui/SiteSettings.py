@@ -31,6 +31,8 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
             data = {}
         self.setupUi(self)
 
+        self.label.hide()
+
         set_wnd_icon(self, 'settings.png')
 
         self.quit.clicked.connect(self.exit)
