@@ -60,8 +60,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                     self.fav_sites.setToolTipDuration(20 * 100)
 
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap("../media/" + (self.sites[key]['favicon']
-                                                 if (not self.sites[key]['favicon'] is None) else "logo.ico")),
+                    icon.addPixmap(QtGui.QPixmap(self.sites[key]['favicon']),
                                    QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
                     self.fav_sites.setIcon(icon)

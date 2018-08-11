@@ -33,12 +33,11 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
             data = {}
         self.setupUi(self)
 
-        self.label.hide()
-
         set_wnd_icon(self, 'settings.png')
 
         self.quit.clicked.connect(self.exit)
         self.save.clicked.connect(self.save_all)
+        self.file_open.clicked.connect(self.open_icon)
 
         self.site_name = data['site_name']
         self.setWindowTitle('Settings: ' + self.site_name)
@@ -80,6 +79,9 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
             text = False
         self.favourite.setChecked(text)
 
+        text = website['favicon']
+        self.icon_path = text
+
         self.notification.setChecked(website['settings']['fail_actions']['send_notification'])
         self.sound.setChecked(website['settings']['fail_actions']['play_sound'])
 
@@ -111,5 +113,10 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                                                                          self.text_edits[8].isChecked()))
                              )
         site.set_favourite(self.site_name, self.text_edits[9].isChecked())
+        site.set_site_icon(self.site_name, self.icon_path)
 
         self.close()
+
+    def open_icon(self):
+        pass
+        self.icon_path = QtWidgets.QFileDialog.getOpenFileName(self, 'select icon', filter="Images (*.png *.jpg *.ico)")[0]

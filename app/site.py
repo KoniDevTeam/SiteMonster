@@ -45,7 +45,7 @@ def save_sites_list(sites_obj: dict):
     files.save(sites_obj, SITES_LIST_FILE)
 
 
-def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = 'logo.ico'):
+def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = '../media/logo.ico'):
     """Add url to sites list.
 
     Generate settings dictionary by `build_settings` method.
@@ -135,6 +135,15 @@ def set_favourite(name: str, favourite: bool):
 
     sites[name]['favourite'] = favourite
     save_sites_list(sites)
+
+
+def set_site_icon(name, icon_path):
+    sites = get_sites_dict()
+    if name in sites.keys():
+        sites[name]['favicon'] = icon_path
+        save_sites_list(sites)
+    else:
+        raise ('Site not exists error')
 
 
 def get_list() -> list:
