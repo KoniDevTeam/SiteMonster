@@ -35,20 +35,14 @@ class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
 
     def start_btn_onclick(self):
         self.window = SiteMonitor()
-        size = self.size()
-        x, y = self.x(), self.y()
+        self.window.setGeometry(self.geometry())
         self.window.show()
-        self.hide()
-        self.window.move(x , y)
-        self.window.resize(size)
-
-    def quit(self):
         self.close()
 
-    def closeEvent(self, event):
+    def quit(self):
         reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
-            event.accept()
+            self.close()
         else:
-            event.ignore()
+            pass

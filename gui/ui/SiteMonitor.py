@@ -33,6 +33,11 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.setWindowTitle('SiteMonster - SiteMonitor')
         set_wnd_icon(self, 'logo.ico')
 
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(3000)
+        self.timer.timeout.connect(self.check_sites_file)
+        self.timer.start()
+
         self.fav_btn_example.hide()
         self.description_.hide()
         self.fav_only_checkbox.hide()
@@ -74,6 +79,16 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.fav_only_checkbox.stateChanged.connect(self.filter)
         self.site_settings.clicked.connect(self.site_settings_onclick)
         self.delete_site.clicked.connect(self.site_delete)
+
+    def check_sites_file(self):
+        if self.sites == site.get_sites_dict():
+            pass
+        else:
+            self.timer.stop()
+            self.window = SiteMonitor()
+            self.window.setGeometry(self.geometry())
+            self.window.show()
+            self.close()
 
     def add_site_onclick(self):
         self.site_add_wnd = SiteAdd()
