@@ -22,10 +22,12 @@ from PyQt5 import QtWidgets
 from gui.ui import site_settings
 from api.gui import *
 from app import site
+import logging as log
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
     def __init__(self, data=None):
+        log.info('Initializing SiteSettings window')
         super().__init__()
         if data is None:
             data = {}
@@ -43,6 +45,8 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
         self.header.setText(self.header.text().replace('[SITENAME]', self.site_name))
 
         website = site.get_sites_dict()[self.site_name]
+
+        log.debug('Getting site settings')
 
         text = website['settings']['method']
         self.http_method.setText(text)
@@ -83,6 +87,7 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
                            self.http_codes, self.expected, self.notification, self.sound, self.favourite]
 
     def exit(self):
+        log.info('Closing window')
         if QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?',
                                           QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
                                           QtWidgets.QMessageBox.No) ==\
@@ -90,6 +95,7 @@ class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):
             self.close()
 
     def save_all(self):
+        log.info('Saving changed settings')
         proxy = None
         if self.text_edits[3].text() != '' or self.text_edits[4].text() != '':
             proxy = {'http': self.text_edits[3].text(), 'https': self.text_edits[4].text()}

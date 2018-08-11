@@ -23,10 +23,12 @@ from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
 from api import sites
 from app import site
+import logging as log
 
 
 class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def __init__(self):
+        log.info('Initializing SiteMonitor window')
         super().__init__()
         self.setupUi(self)
 
@@ -45,6 +47,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.site_settings.hide()
         self.delete_site.hide()
 
+        log.debug('Building sites list')
         if site.get_sites_dict().keys().__len__() > 0:
             self.sites = site.get_sites_dict()
             for key in self.sites:
@@ -81,6 +84,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.delete_site.clicked.connect(self.site_delete)
 
     def check_sites_file(self):
+        log.debug('Checking siteList.json for changes')
         if self.sites == site.get_sites_dict():
             pass
         else:
@@ -91,6 +95,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             self.close()
 
     def add_site_onclick(self):
+        log.info('Opening SiteAdd window')
         self.site_add_wnd = SiteAdd()
         geometry = self.geometry()
         self.site_add_wnd.show()
@@ -98,6 +103,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
 
     def make_get_site_info(self, name: str):
         def get_site_info():
+            log.debug('Getting info about \'' + name + '\'')
             self.site = name
             self.message_label.setText('Info about [SITENAME]'.replace('[SITENAME]', name))
             self.description_.show()
@@ -111,8 +117,6 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         return get_site_info
 
     def menu_onclick(self):
-        # print(self.menu_btn.dynamicPropertyNames())
-
         state: bool = not self.menu_btn.property('state')
         self.menu_btn.setProperty('state', state)
 
@@ -129,9 +133,9 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                 fav_site.setText(fav_site.objectName())
             else:
                 fav_site.setText('')
-                # self.fav_container.removeWidget(fav_site)  # terrible thing
 
     def filter(self):
+        log.debug('Filtering list of sites')
         state = self.fav_only_checkbox.checkState()
         tmp: int = 2
         for siteobj in self.fav_container_.children():
@@ -145,12 +149,14 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                     siteobj.show()
 
     def site_settings_onclick(self):
+        log.info('Opening SiteSettings window about \'' + self.site + '\'')
         geometry = self.geometry()
         self.settings = SiteSettings({'site_name': self.site})
         self.settings.setGeometry(geometry)
         self.settings.show()
 
     def site_delete(self):
+        log.info('Deleting site \'' + self.site + '\'')
         name = self.site
         if QtWidgets.QMessageBox().question(self, 'Really', 'Are you sure to delete ' + name + '?',
                                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,

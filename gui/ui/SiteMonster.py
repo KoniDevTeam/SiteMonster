@@ -20,26 +20,30 @@ from PyQt5 import QtWidgets
 from gui.ui import welcome as design
 from gui.ui.SiteMonitor import SiteMonitor
 from api.gui import *
+import logging as log
 
 
 class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
     def __init__(self):
+        log.info('Initializing SiteMonster window')
         super().__init__()
         self.setupUi(self)
 
-        self.setWindowTitle("Welcome")
+        self.setWindowTitle('Welcome')
         set_wnd_icon(self, 'logo.ico')
 
         self.start_btn.clicked.connect(self.start_btn_onclick)
         self.quit_btn.clicked.connect(self.quit)
 
     def start_btn_onclick(self):
+        log.debug('Opening Monitor window')
         self.window = SiteMonitor()
         self.window.setGeometry(self.geometry())
         self.window.show()
         self.close()
 
     def quit(self):
+        log.info('Quitting the app')
         reply = QtWidgets.QMessageBox.question(self, 'Message', 'Are you sure to quit?', QtWidgets.QMessageBox.Yes |
                                                QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:

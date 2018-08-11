@@ -21,10 +21,12 @@ from gui.ui import site_add
 from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
 from app import site
+import logging as log
 
 
 class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):
     def __init__(self):
+        log.info('Initializing SiteAdd window')
         super().__init__()
         self.setupUi(self)
 
@@ -38,6 +40,7 @@ class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):
         if len(self.name.text()) > 3:
             if self.name.text() not in site.get_sites_dict().keys():
                 if len(self.url.text()) > 2:
+                    log.debug('Opening SiteSettings window for just created site \'' + self.name.text() + '\'')
                     site.add(self.name.text(), self.url.text(), site.build_settings())
                     self.settings_window = SiteSettings({'site_name': self.name.text()})
                     geometry = self.geometry()
@@ -63,3 +66,4 @@ class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):
 
     def quit(self):
         self.close()
+        log.info('Closing SiteAdd window')
