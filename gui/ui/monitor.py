@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'gui/ui/monitor.ui'
-#
-# Created by: PyQt5 UI code generator 5.10.1
-#
-# WARNING! All changes made in this file will be lost!
-
 # Copyright (C) 2018 Koni Dev Team, All Rights Reserved
 # https://github.com/KoniDevTeam/SiteMonster/
 #
@@ -64,10 +56,10 @@ class Ui_Dialog(object):
 "    height: 24px;\n"
 "}\n"
 "QPushButton[state=\"false\"]{\n"
-"    border-image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/menu.png);\n"
+"    border-image: url(../media/menu.png) 24px;\n"
 "}\n"
 "QPushButton[state=\"true\"]{\n"
-"    border-image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/back.png);\n"
+"    border-image: url(../media/back.png) 24px;\n"
 "}")
         self.menu_btn.setText("")
         self.menu_btn.setIconSize(QtCore.QSize(24, 24))
@@ -78,7 +70,30 @@ class Ui_Dialog(object):
         self.menu_btn.setObjectName("menu_btn")
         self.menu_vert.addWidget(self.menu_btn)
         self.fav_only_checkbox = QtWidgets.QCheckBox(self.menu_vert_)
-        self.fav_only_checkbox.setStyleSheet("::indicator {width: \"24\"; height: \"24\"}")
+        self.fav_only_checkbox.setStyleSheet("QCheckBox::indicator {\n"
+"    height: 24px;\n"
+"    width: 24px;\n"
+"}\n"
+"QCheckBox::indicator:unchecked{\n"
+"    image: url(../media/checkbox-off.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked:hover{\n"
+"    image: url(../media/checkbox-off-hover.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked:pressed{\n"
+"    image: url(../media/checkbox-off-pressed.png);\n"
+"}\n"
+"QCheckBox::indicator:checked{\n"
+"    image: url(../media/checkbox-on.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:hover{\n"
+"    image: url(../media/checkbox-on-hover.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:pressed{\n"
+"    image: url(../media/checkbox-on-pressed.png);\n"
+"}\n"
+"\n"
+"")
         self.fav_only_checkbox.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../media/filter.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)

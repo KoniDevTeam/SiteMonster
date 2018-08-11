@@ -25,6 +25,32 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QCheckBox::indicator {
+	height: 24px;
+	width: 24px;
+}
+QCheckBox::indicator:unchecked{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off.png);
+}
+QCheckBox::indicator:unchecked:hover{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off-hover.png);
+}
+QCheckBox::indicator:unchecked:pressed{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off-pressed.png);
+}
+QCheckBox::indicator:checked{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on.png);
+}
+QCheckBox::indicator:checked:hover{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on-hover.png);
+}
+QCheckBox::indicator:checked:pressed{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on-pressed.png);
+}
+
+</string>
+  </property>
   <layout class="QFormLayout" name="formLayout_2">
    <property name="horizontalSpacing">
     <number>12</number>
@@ -32,6 +58,19 @@
    <property name="verticalSpacing">
     <number>8</number>
    </property>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="header">
+     <property name="font">
+      <font>
+       <family>Segoe UI Semilight</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Settings - [SITENAME]</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0" colspan="2">
     <widget class="Line" name="line">
      <property name="sizePolicy">
@@ -340,6 +379,18 @@ QCheckBox::indicator:checked:pressed {
      </property>
     </widget>
    </item>
+   <item row="15" column="0">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Icon</string>
+     </property>
+    </widget>
+   </item>
    <item row="16" column="0" colspan="2">
     <widget class="QWidget" name="widget" native="true">
      <property name="sizePolicy">
@@ -409,31 +460,6 @@ QCheckBox::indicator:checked:pressed {
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="header">
-     <property name="font">
-      <font>
-       <family>Segoe UI Semilight</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Settings - [SITENAME]</string>
-     </property>
-    </widget>
-   </item>
-   <item row="15" column="0">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <pointsize>15</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Icon</string>
-     </property>
     </widget>
    </item>
   </layout>

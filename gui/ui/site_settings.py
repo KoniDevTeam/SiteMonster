@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'gui/ui/site_settings.ui'
-#
-# Created by: PyQt5 UI code generator 5.10.1
-#
-# WARNING! All changes made in this file will be lost!
-
 # Copyright (C) 2018 Koni Dev Team, All Rights Reserved
 # https://github.com/KoniDevTeam/SiteMonster/
 #
@@ -35,10 +27,41 @@ class Ui_Dialog(object):
         font.setFamily("Segoe UI")
         font.setPointSize(12)
         Dialog.setFont(font)
+        Dialog.setStyleSheet("QCheckBox::indicator {\n"
+"    height: 24px;\n"
+"    width: 24px;\n"
+"}\n"
+"QCheckBox::indicator:unchecked{\n"
+"    image: url(../media/checkbox-off.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked:hover{\n"
+"    image: url(../media/checkbox-off-hover.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked:pressed{\n"
+"    image: url(../media/checkbox-off-pressed.png);\n"
+"}\n"
+"QCheckBox::indicator:checked{\n"
+"    image: url(../media/checkbox-on.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:hover{\n"
+"    image: url(../media/checkbox-on-hover.png);\n"
+"}\n"
+"QCheckBox::indicator:checked:pressed{\n"
+"    image: url(../media/checkbox-on-pressed.png);\n"
+"}\n"
+"\n"
+"")
         self.formLayout_2 = QtWidgets.QFormLayout(Dialog)
         self.formLayout_2.setHorizontalSpacing(12)
         self.formLayout_2.setVerticalSpacing(8)
         self.formLayout_2.setObjectName("formLayout_2")
+        self.header = QtWidgets.QLabel(Dialog)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(20)
+        self.header.setFont(font)
+        self.header.setObjectName("header")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.header)
         self.line = QtWidgets.QFrame(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -208,6 +231,12 @@ class Ui_Dialog(object):
 "}")
         self.favourite.setObjectName("favourite")
         self.formLayout_2.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.favourite)
+        self.label = QtWidgets.QLabel(Dialog)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.LabelRole, self.label)
         self.widget = QtWidgets.QWidget(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -250,19 +279,6 @@ class Ui_Dialog(object):
         self.quit.setObjectName("quit")
         self.horizontalLayout.addWidget(self.quit)
         self.formLayout_2.setWidget(16, QtWidgets.QFormLayout.SpanningRole, self.widget)
-        self.header = QtWidgets.QLabel(Dialog)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(20)
-        self.header.setFont(font)
-        self.header.setObjectName("header")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.header)
-        self.label = QtWidgets.QLabel(Dialog)
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.LabelRole, self.label)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -280,6 +296,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.header.setText(_translate("Dialog", "Settings - [SITENAME]"))
         self.http_method_label.setText(_translate("Dialog", "HTTP method"))
         self.http_headers_label.setText(_translate("Dialog", "HTTP headers"))
         self.http_body_label.setText(_translate("Dialog", "HTTP request body"))
@@ -290,8 +307,7 @@ class Ui_Dialog(object):
         self.notification.setText(_translate("Dialog", "Send notification if server not responding"))
         self.sound.setText(_translate("Dialog", "Play sound if server not responding"))
         self.favourite.setText(_translate("Dialog", "Favourite"))
+        self.label.setText(_translate("Dialog", "Icon"))
         self.save.setText(_translate("Dialog", "Save settings and quit"))
         self.quit.setText(_translate("Dialog", "Quit without saving"))
-        self.header.setText(_translate("Dialog", "Settings - [SITENAME]"))
-        self.label.setText(_translate("Dialog", "Icon"))
 
