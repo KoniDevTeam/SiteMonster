@@ -380,9 +380,10 @@ QCheckBox::indicator:checked:pressed {
     </widget>
    </item>
    <item row="15" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="icon_label">
      <property name="font">
       <font>
+       <family>Segoe UI</family>
        <pointsize>15</pointsize>
       </font>
      </property>
@@ -460,6 +461,19 @@ QCheckBox::indicator:checked:pressed {
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="15" column="1">
+    <widget class="QPushButton" name="file_open">
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>open file...</string>
+     </property>
     </widget>
    </item>
   </layout>

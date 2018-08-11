@@ -32,22 +32,22 @@ class Ui_Dialog(object):
 "    width: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked{\n"
-"    image: url(../media/checkbox-off.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:hover{\n"
-"    image: url(../media/checkbox-off-hover.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:pressed{\n"
-"    image: url(../media/checkbox-off-pressed.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked{\n"
-"    image: url(../media/checkbox-on.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover{\n"
-"    image: url(../media/checkbox-on-hover.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed{\n"
-"    image: url(../media/checkbox-on-pressed.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/checkbox-on-pressed.png);\n"
 "}\n"
 "\n"
 "")
@@ -212,31 +212,32 @@ class Ui_Dialog(object):
 "    height: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked {\n"
-"    image: url(../media/star-off.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:hover {\n"
-"    image: url(../media/star-off-hover.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off-hover.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:pressed {\n"
-"    image: url(../media/star-off-pressed.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked {\n"
-"    image: url(../media/star-on.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover {\n"
-"    image: url(../media/star-on-hover.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed {\n"
-"    image: url(../media/star-on-pressed.png);\n"
+"    image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/star-on-pressed.png);\n"
 "}")
         self.favourite.setObjectName("favourite")
         self.formLayout_2.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.favourite)
-        self.label = QtWidgets.QLabel(Dialog)
+        self.icon_label = QtWidgets.QLabel(Dialog)
         font = QtGui.QFont()
+        font.setFamily("Segoe UI")
         font.setPointSize(15)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.icon_label.setFont(font)
+        self.icon_label.setObjectName("icon_label")
+        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.LabelRole, self.icon_label)
         self.widget = QtWidgets.QWidget(Dialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -279,6 +280,13 @@ class Ui_Dialog(object):
         self.quit.setObjectName("quit")
         self.horizontalLayout.addWidget(self.quit)
         self.formLayout_2.setWidget(16, QtWidgets.QFormLayout.SpanningRole, self.widget)
+        self.file_open = QtWidgets.QPushButton(Dialog)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(15)
+        self.file_open.setFont(font)
+        self.file_open.setObjectName("file_open")
+        self.formLayout_2.setWidget(15, QtWidgets.QFormLayout.FieldRole, self.file_open)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -307,7 +315,8 @@ class Ui_Dialog(object):
         self.notification.setText(_translate("Dialog", "Send notification if server not responding"))
         self.sound.setText(_translate("Dialog", "Play sound if server not responding"))
         self.favourite.setText(_translate("Dialog", "Favourite"))
-        self.label.setText(_translate("Dialog", "Icon"))
+        self.icon_label.setText(_translate("Dialog", "Icon"))
         self.save.setText(_translate("Dialog", "Save settings and quit"))
         self.quit.setText(_translate("Dialog", "Quit without saving"))
+        self.file_open.setText(_translate("Dialog", "open file..."))
 
