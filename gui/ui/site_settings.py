@@ -21,8 +21,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(640, 531)
-        Dialog.setMinimumSize(QtCore.QSize(640, 480))
+        Dialog.resize(640, 520)
+        Dialog.setMinimumSize(QtCore.QSize(640, 520))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(12)
