@@ -87,7 +87,7 @@
       </font>
      </property>
      <property name="text">
-      <string>This app will notify you about any your server state. And it can make loud alarm if something went wrong :)</string>
+      <string>This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)</string>
      </property>
      <property name="textFormat">
       <enum>Qt::PlainText</enum>
@@ -112,7 +112,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Lets start using it
+      <string>Let's start using it
 and make some noise!</string>
      </property>
      <property name="textFormat">
@@ -219,7 +219,6 @@ and make some noise!</string>
   <zorder>welcome_title</zorder>
   <zorder>welcome_header</zorder>
   <zorder>label_2</zorder>
-  <zorder>gridLayoutWidget</zorder>
   <zorder>quit_btn</zorder>
   <zorder>verticalSpacer</zorder>
   <zorder>verticalSpacer_2</zorder>

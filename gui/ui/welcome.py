@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'gui/ui/welcome.ui'
-#
-# Created by: PyQt5 UI code generator 5.10.1
-#
-# WARNING! All changes made in this file will be lost!
-
 # Copyright (C) 2018 Koni Dev Team, All Rights Reserved
 # https://github.com/KoniDevTeam/SiteMonster/
 #
@@ -142,8 +134,8 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.welcome_header.setText(_translate("Dialog", "Welcome to SiteMonster!"))
-        self.welcome_title.setText(_translate("Dialog", "This app will notify you about any your server state. And it can make loud alarm if something went wrong :)"))
-        self.label_2.setText(_translate("Dialog", "Lets start using it\n"
+        self.welcome_title.setText(_translate("Dialog", "This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)"))
+        self.label_2.setText(_translate("Dialog", "Let\'s start using it\n"
 "and make some noise!"))
         self.start_btn.setText(_translate("Dialog", "Start"))
         self.quit_btn.setText(_translate("Dialog", "quit"))
