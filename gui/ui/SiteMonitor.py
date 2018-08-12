@@ -50,8 +50,8 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.delete_site.hide()
 
         log.debug('Building sites list')
+        self.sites = site.get_sites_dict()
         if site.get_sites_dict().keys().__len__() > 0:
-            self.sites = site.get_sites_dict()
             for key in self.sites:
                 if True:
                     self.fav_sites = QtWidgets.QPushButton(self.fav_container_)
