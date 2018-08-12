@@ -27,8 +27,6 @@ import logging as log
 
 
 class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
-    sites = {}
-
     def __init__(self):
         log.info('Initializing SiteMonitor window')
         super().__init__()
