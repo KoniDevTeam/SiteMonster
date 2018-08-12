@@ -53,6 +53,6 @@ Copyright (C) 2018 Koni Dev Team, All Rights Reserved<br>
 *For any questions contact <nikitaserba@icloud.com><br>*
 **Project team:**
 * Nikita Serba <<nikitaserba@icloud.com>>
-* Nick Bashmakov <<MrGraphitem@gmail.com>>
+* Mykola Bashmakov <<MrGraphitem@gmail.com>>
 
 **Contributors:**
