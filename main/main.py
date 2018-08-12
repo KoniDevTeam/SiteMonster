@@ -16,16 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
 import sys
 import os
 import psutil
-from app import logger
-import logging
 import platform
 import subprocess
 
 from PyQt5 import QtWidgets
 
+from app import logger
 from gui.ui.SiteMonster import SiteMonster
 from api import osinfo, updates
 
