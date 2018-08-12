@@ -27,6 +27,8 @@ import logging as log
 
 
 class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
+    sites = {}
+
     def __init__(self):
         log.info('Initializing SiteMonitor window')
         super().__init__()
@@ -36,7 +38,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         set_wnd_icon(self, 'logo.ico')
 
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(3000)
+        self.timer.setInterval(5000)
         self.timer.timeout.connect(self.check_sites_file)
         self.timer.start()
 
