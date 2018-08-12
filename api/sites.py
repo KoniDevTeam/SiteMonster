@@ -33,23 +33,28 @@ def check(site: dict) -> bool:
     success = True
     r = None
 
+    url = site['url']
+
+    if '://' not in url:
+        url = 'http://' + url
+
     try:
-        r = requests.request(settings['method'], site['url'], headers=settings['headers'], data=settings['body'],
+        r = requests.request(settings['method'], url, headers=settings['headers'], data=settings['body'],
                              proxies=settings['proxy'])
     except Exception:
         success = False
 
     if not success:
-        logging.info("Can't send request to " + site['url'])
+        logging.info("Can't send request to " + url)
         return False
 
     if not is_status_code_good(settings['expected_code'], r.status_code):
         logging.info("Invalid response's status code: expected " + str(settings['expected_code']) + ', got ' + str(
-            r.status_code))
+            r.status_code) + ' on ' + url)
         return False
 
     if not is_answer_good(settings['expected_answer'], r.text):
-        logging.info("Invalid server's response: expected" + str(settings['expected_answer']) + ', got ' + r.text)
+        logging.info("Invalid server's response: expected" + str(settings['expected_answer']) + ', got ' + r.text + ' on ' + url)
         return False
 
     return True
