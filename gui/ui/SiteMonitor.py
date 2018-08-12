@@ -28,6 +28,8 @@ import logging as log
 
 class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
     def __init__(self):
+        self.sites = site.get_sites_dict()
+
         log.info('Initializing SiteMonitor window')
         super().__init__()
         self.setupUi(self)
@@ -48,7 +50,6 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.delete_site.hide()
 
         log.debug('Building sites list')
-        self.sites = site.get_sites_dict()
         if site.get_sites_dict().keys().__len__() > 0:
             for key in self.sites:
                 if True:
@@ -91,6 +92,9 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             self.window = SiteMonitor()
             self.window.setGeometry(self.geometry())
             self.window.show()
+            # if(self.site_add_wnd.settings_window.isWindow()):
+            #     self.site_add_wnd.settings_window.setFocus()
+            print('HELLO!')
             self.close()
 
     def add_site_onclick(self):
@@ -161,8 +165,3 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
                                             QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes:
             site.delete(name)
-        geometry = self.geometry()
-        self.wnd = SiteMonitor()
-        self.wnd.setGeometry(geometry)
-        self.wnd.show()
-        self.close()
