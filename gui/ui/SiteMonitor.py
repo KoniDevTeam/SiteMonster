@@ -92,9 +92,6 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             self.window = SiteMonitor()
             self.window.setGeometry(self.geometry())
             self.window.show()
-            # if(self.site_add_wnd.settings_window.isWindow()):
-            #     self.site_add_wnd.settings_window.setFocus()
-            print('HELLO!')
             self.close()
 
     def add_site_onclick(self):
