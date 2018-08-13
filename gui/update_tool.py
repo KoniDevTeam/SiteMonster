@@ -83,7 +83,7 @@ class UpdateToolWindow(QWidget):
 
         self.setGeometry((self.screen_size.width() - self.WINDOW_WIDTH) / 2,
                          (self.screen_size.height() - self.WINDOW_HEIGHT) / 2, self.WINDOW_WIDTH, self.WINDOW_HEIGHT)
-        self.setWindowTitle(appinfo.APP_NAME + ' Info')
+        self.setWindowTitle(appinfo.APP_NAME + ' Updating')
         self.setWindowIcon(QIcon(appinfo.APP_ICON))
         self.setFixedSize(self.size())
 
