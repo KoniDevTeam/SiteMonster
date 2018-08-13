@@ -8,6 +8,7 @@ We will release the first version soon.
 Download latest source code from [here](https://github.com/KoniDevTeam/SiteMonster/releases).
 Unzip source and run this in source folder:
 ```bash
+make prep
 make
 make install
 ```
