@@ -23,7 +23,7 @@ from api.gui import *
 import logging as log
 
 
-class SiteMonster(QtWidgets.QDialog, design.Ui_Dialog):
+class SiteMonster(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         log.info('Initializing SiteMonster window')
         super().__init__()

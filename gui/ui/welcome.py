@@ -15,33 +15,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'gui/ui/welcome.ui'
+#
+# Created by: PyQt5 UI code generator 5.10.1
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(640, 480)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
-        Dialog.setSizePolicy(sizePolicy)
-        Dialog.setMinimumSize(QtCore.QSize(640, 480))
-        Dialog.setMaximumSize(QtCore.QSize(1280, 720))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(8)
-        font.setBold(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
-        Dialog.setFont(font)
-        Dialog.setLayoutDirection(QtCore.Qt.RightToLeft)
-        Dialog.setSizeGripEnabled(False)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(640, 480)
+        MainWindow.setMinimumSize(QtCore.QSize(640, 480))
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.welcome_header = QtWidgets.QLabel(Dialog)
+        self.welcome_header = QtWidgets.QLabel(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -55,7 +49,7 @@ class Ui_Dialog(object):
         self.welcome_header.setTextFormat(QtCore.Qt.PlainText)
         self.welcome_header.setObjectName("welcome_header")
         self.verticalLayout.addWidget(self.welcome_header)
-        self.welcome_title = QtWidgets.QLabel(Dialog)
+        self.welcome_title = QtWidgets.QLabel(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -70,7 +64,7 @@ class Ui_Dialog(object):
         self.welcome_title.setWordWrap(True)
         self.welcome_title.setObjectName("welcome_title")
         self.verticalLayout.addWidget(self.welcome_title)
-        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -84,12 +78,12 @@ class Ui_Dialog(object):
         self.label_2.setWordWrap(True)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 54, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setContentsMargins(10, -1, 10, -1)
         self.gridLayout.setObjectName("gridLayout")
-        self.start_btn = QtWidgets.QPushButton(Dialog)
+        self.start_btn = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -98,20 +92,21 @@ class Ui_Dialog(object):
         self.start_btn.setMinimumSize(QtCore.QSize(80, 48))
         self.start_btn.setMaximumSize(QtCore.QSize(180, 48))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI")
         font.setPointSize(15)
         self.start_btn.setFont(font)
         self.start_btn.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.start_btn.setObjectName("start_btn")
         self.gridLayout.addWidget(self.start_btn, 0, 0, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 54, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
-        self.line = QtWidgets.QFrame(Dialog)
+        self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.verticalLayout.addWidget(self.line)
-        self.quit_btn = QtWidgets.QPushButton(Dialog)
+        self.quit_btn = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -120,23 +115,18 @@ class Ui_Dialog(object):
         self.quit_btn.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.quit_btn.setObjectName("quit_btn")
         self.verticalLayout.addWidget(self.quit_btn)
-        self.welcome_title.raise_()
-        self.welcome_header.raise_()
-        self.label_2.raise_()
-        self.quit_btn.raise_()
-        self.line.raise_()
+        MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-        Dialog.setTabOrder(self.start_btn, self.quit_btn)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.welcome_header.setText(_translate("Dialog", "Welcome to SiteMonster!"))
-        self.welcome_title.setText(_translate("Dialog", "This app will notify you about any change of your server condition. And it can produce a loud sound if something went wrong :)"))
-        self.label_2.setText(_translate("Dialog", "Let\'s start using it\n"
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.welcome_header.setText(_translate("MainWindow", "Welcome to SiteMonster!"))
+        self.welcome_title.setText(_translate("MainWindow", "This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)"))
+        self.label_2.setText(_translate("MainWindow", "Let\'s start using it\n"
 "and make some noise!"))
-        self.start_btn.setText(_translate("Dialog", "Start"))
-        self.quit_btn.setText(_translate("Dialog", "quit"))
+        self.start_btn.setText(_translate("MainWindow", "Start"))
+        self.quit_btn.setText(_translate("MainWindow", "quit"))
 
