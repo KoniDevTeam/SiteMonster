@@ -191,7 +191,7 @@ class Ui_MainWindow(object):
         self.container_.setAccessibleName("")
         self.container_.setObjectName("container_")
         self.container_2 = QtWidgets.QHBoxLayout(self.container_)
-        self.container_2.setContentsMargins(-1, 0, -1, 0)
+        self.container_2.setContentsMargins(0, 0, -1, 0)
         self.container_2.setObjectName("container_2")
         self.line = QtWidgets.QFrame(self.container_)
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
