@@ -27,7 +27,7 @@ from PyQt5 import QtWidgets
 
 from app import logger
 from gui.ui.SiteMonster import SiteMonster
-from api import osinfo, updates
+from api import osinfo, updates, updater_updates
 
 
 def run(name: str):
@@ -89,11 +89,27 @@ def run_updater():
     exit(0)
 
 
+def update_updater():
+    try:
+        logging.info('Begging updating.')
+        if not updater_updates.is_up_to_date():
+            thread = updater_updates.UpdaterUpdater()
+            thread.start()
+            return thread
+        else:
+            return None
+    except Exception as e:
+        logging.error("Can't update updater: " + str(e))
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     test_for_update()
+    thr = update_updater()
     window = SiteMonster()
     window.show()
+    if thr is not None:
+        thr.join()
     sys.exit(app.exec_())
 
 
