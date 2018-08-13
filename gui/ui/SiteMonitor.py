@@ -40,7 +40,7 @@ class SiteMonitor(QtWidgets.QMainWindow, monitor.Ui_MainWindow):
         set_wnd_icon(self, 'logo.ico')
 
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(5000)
+        self.timer.setInterval(1000)
         self.timer.timeout.connect(self.check_sites_file)
         self.timer.start()
 
