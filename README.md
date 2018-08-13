@@ -4,6 +4,13 @@ App that checks your website availability and send notification to you if it is 
 **Platform**: **Windows/Linux** (**Debain/Ubuntu/Mint** *(deb packages, snap)*, **RHEL/CentOS/Fedora** *(rpm packages)*, **other linux** *(source compile)*)
 ## Download latest version
 We will soon release first version.
+## Install from source on linux
+Download latest source code from [here](https://github.com/KoniDevTeam/SiteMonster/releases).
+Unzip source and run this in source folder:
+```bash
+make
+make install
+```
 ## Features
 You can check your webites' availability directly in app interface. Also, every second it checks every your website. If your website is down, app will report it. App can:
 * Send push notifications on your pc
