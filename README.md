@@ -1,9 +1,9 @@
 # SiteMonster
-App that checks your website availability and send notification to you if it is down.
+App that checks your website availability and sends notification to you if it is down.
 
 **Platform**: **Windows/Linux** (**Debain/Ubuntu/Mint** *(deb packages, snap)*, **RHEL/CentOS/Fedora** *(rpm packages)*, **other linux** *(source compile)*)
 ## Download latest version
-We will soon release first version.
+We will release the first version soon.
 ## Install from source on linux
 Download latest source code from [here](https://github.com/KoniDevTeam/SiteMonster/releases).
 Unzip source and run this in source folder:
@@ -12,22 +12,21 @@ make
 make install
 ```
 ## Features
-You can check your webites' availability directly in app interface. Also, every second it checks every your website. If your website is down, app will report it. App can:
-* Send push notifications on your pc
-* Play load alarm
+You can check your webites' availability directly in the app interface. Also, every second it is checking all your websites. If your website is down, app will report about it. The app can do the following:
+* Send push notifications to your PC
+* Play a loud alarm sound
 ## Planned features
-* Translate app to russian and ukranian (v1.1)
+* Translate the app to Russian and Ukrainian (v1.1)
 * Port to macOS, add binaries for Arch linux (v1.1)
-* Notifications on mobile phone (iOS, Android) (v1.1)
+* Notifications for mobile phone (iOS, Android) (v1.1)
 * Detailed configuration (v1.1)
 * Email and telegram notifications (v1.2)
 * sitemap.xml scanner (v1.2)
-* Bad links searching (v1.2)
+* Bad links search (v1.2)
 ## Contribution
-You can freely contribute in our github. There're many things you can do: bug fixes, new features, translations. Please,
-follow several simple rules:
+You can freely contribute to our github. There're many things you can do: fix bugs, add new features, make translations. Please follow several simple rules:
 * Create one pull request per one feature
-* Create one commit for one small piece of realization
+* Create one commit for one small piece of implementation
 * Write simple functions. Every function must do one small thing. All actions in function must be on one abstraction level.
 * Specify type of return value and arguments, e.g.
 ```python 
