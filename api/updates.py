@@ -86,6 +86,7 @@ def is_up_to_date() -> bool:
         return True
     else:
         logging.warning('App is not up to date!')
+        return False
 
 
 def download_new_version():
