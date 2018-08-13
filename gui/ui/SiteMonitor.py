@@ -18,6 +18,7 @@
 
 from PyQt5 import QtWidgets, QtCore
 from gui.ui import monitor
+from gui.ui.AppAbout import AppAbout
 from gui.ui.SiteAdd import SiteAdd
 from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
@@ -26,8 +27,9 @@ from app import site
 import logging as log
 
 
-class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
+class SiteMonitor(QtWidgets.QMainWindow, monitor.Ui_MainWindow):
     def __init__(self):
+        # self.setAttribute(QtCore.Qt.WA_TintedBackground)
         self.sites = site.get_sites_dict()
 
         log.info('Initializing SiteMonitor window')
@@ -54,7 +56,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
             for key in self.sites:
                 if True:
                     self.fav_sites = QtWidgets.QPushButton(self.fav_container_)
-                    self.fav_container.addWidget(self.fav_sites)
+                    self.fav_sites.setText('')
                     self.fav_sites.setObjectName(key)
 
                     self.fav_sites.setToolTip(key)
@@ -67,8 +69,8 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                     self.fav_sites.setIcon(icon)
                     self.fav_sites.setIconSize(QtCore.QSize(24, 24))
                     self.fav_sites.setMaximumSize(QtCore.QSize(256, 32))
+                    self.fav_sites.setMinimumSize(QtCore.QSize(24, 24))
                     self.fav_sites.clicked.connect(self.make_get_site_info(key))
-                    # self.fav_sites.setText(key)
 
                     self.fav_container.addWidget(self.fav_sites)
                     if not self.sites[key]['favourite']:
@@ -82,6 +84,7 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
         self.fav_only_checkbox.stateChanged.connect(self.filter)
         self.site_settings.clicked.connect(self.site_settings_onclick)
         self.delete_site.clicked.connect(self.site_delete)
+        self.actionAbout.triggered.connect(self.about_onclick)
 
     def check_sites_file(self):
         log.debug('Checking siteList.json for changes')
@@ -162,3 +165,8 @@ class SiteMonitor(QtWidgets.QDialog, monitor.Ui_Dialog):
                                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
                                             QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes:
             site.delete(name)
+
+    def about_onclick(self):
+        self.about_wnd = AppAbout()
+        self.about_wnd.show()
+        print('hey there')

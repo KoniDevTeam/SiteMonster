@@ -1,33 +1,24 @@
-# Copyright (C) 2018 Koni Dev Team, All Rights Reserved
-# https://github.com/KoniDevTeam/SiteMonster/
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'gui/ui/monitor.ui'
 #
-# This file is part of Site Monster.
+# Created by: PyQt5 UI code generator 5.10.1
 #
-# Site Monster is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Site Monster is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(640, 480)
-        Dialog.setMinimumSize(QtCore.QSize(640, 480))
-        Dialog.setMaximumSize(QtCore.QSize(1920, 1080))
-        self.hboxlayout = QtWidgets.QHBoxLayout(Dialog)
-        self.hboxlayout.setSpacing(0)
-        self.hboxlayout.setObjectName("hboxlayout")
-        self.menu_vert_ = QtWidgets.QWidget(Dialog)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(640, 480)
+        MainWindow.setMinimumSize(QtCore.QSize(640, 480))
+        MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.menu_vert_ = QtWidgets.QWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,10 +26,10 @@ class Ui_Dialog(object):
         self.menu_vert_.setSizePolicy(sizePolicy)
         self.menu_vert_.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.menu_vert_.setObjectName("menu_vert_")
-        self.menu_vert = QtWidgets.QVBoxLayout(self.menu_vert_)
-        self.menu_vert.setContentsMargins(0, 0, 0, -1)
-        self.menu_vert.setSpacing(6)
-        self.menu_vert.setObjectName("menu_vert")
+        self.menu_vert_2 = QtWidgets.QVBoxLayout(self.menu_vert_)
+        self.menu_vert_2.setContentsMargins(0, 0, 0, -1)
+        self.menu_vert_2.setSpacing(6)
+        self.menu_vert_2.setObjectName("menu_vert_2")
         self.menu_btn = QtWidgets.QPushButton(self.menu_vert_)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
@@ -68,7 +59,7 @@ class Ui_Dialog(object):
         self.menu_btn.setFlat(True)
         self.menu_btn.setProperty("state", False)
         self.menu_btn.setObjectName("menu_btn")
-        self.menu_vert.addWidget(self.menu_btn)
+        self.menu_vert_2.addWidget(self.menu_btn)
         self.fav_only_checkbox = QtWidgets.QCheckBox(self.menu_vert_)
         self.fav_only_checkbox.setStyleSheet("QCheckBox::indicator {\n"
 "    height: 24px;\n"
@@ -101,9 +92,9 @@ class Ui_Dialog(object):
         self.fav_only_checkbox.setIconSize(QtCore.QSize(24, 24))
         self.fav_only_checkbox.setChecked(True)
         self.fav_only_checkbox.setObjectName("fav_only_checkbox")
-        self.menu_vert.addWidget(self.fav_only_checkbox)
+        self.menu_vert_2.addWidget(self.fav_only_checkbox)
         self.fav_container_ = QtWidgets.QWidget(self.menu_vert_)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.fav_container_.sizePolicy().hasHeightForWidth())
@@ -121,16 +112,24 @@ class Ui_Dialog(object):
         self.fav_container.setSpacing(15)
         self.fav_container.setObjectName("fav_container")
         self.fav_btn_example = QtWidgets.QPushButton(self.fav_container_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fav_btn_example.sizePolicy().hasHeightForWidth())
+        self.fav_btn_example.setSizePolicy(sizePolicy)
+        self.fav_btn_example.setMinimumSize(QtCore.QSize(24, 24))
         self.fav_btn_example.setMaximumSize(QtCore.QSize(256, 32))
+        self.fav_btn_example.setSizeIncrement(QtCore.QSize(0, 0))
+        self.fav_btn_example.setBaseSize(QtCore.QSize(32, 32))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../media/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.fav_btn_example.setIcon(icon1)
         self.fav_btn_example.setIconSize(QtCore.QSize(24, 24))
         self.fav_btn_example.setObjectName("fav_btn_example")
         self.fav_container.addWidget(self.fav_btn_example)
-        self.menu_vert.addWidget(self.fav_container_)
+        self.menu_vert_2.addWidget(self.fav_container_)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.menu_vert.addItem(spacerItem)
+        self.menu_vert_2.addItem(spacerItem)
         self.plus_site = QtWidgets.QPushButton(self.menu_vert_)
         self.plus_site.setMinimumSize(QtCore.QSize(24, 24))
         self.plus_site.setMaximumSize(QtCore.QSize(32, 32))
@@ -142,7 +141,7 @@ class Ui_Dialog(object):
         self.plus_site.setIconSize(QtCore.QSize(24, 24))
         self.plus_site.setFlat(True)
         self.plus_site.setObjectName("plus_site")
-        self.menu_vert.addWidget(self.plus_site)
+        self.menu_vert_2.addWidget(self.plus_site)
         self.settings_btn = QtWidgets.QPushButton(self.menu_vert_)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -164,9 +163,9 @@ class Ui_Dialog(object):
         self.settings_btn.setIconSize(QtCore.QSize(24, 24))
         self.settings_btn.setFlat(True)
         self.settings_btn.setObjectName("settings_btn")
-        self.menu_vert.addWidget(self.settings_btn)
-        self.hboxlayout.addWidget(self.menu_vert_)
-        self.container_ = QtWidgets.QWidget(Dialog)
+        self.menu_vert_2.addWidget(self.settings_btn)
+        self.horizontalLayout.addWidget(self.menu_vert_)
+        self.container_ = QtWidgets.QWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -174,15 +173,20 @@ class Ui_Dialog(object):
         self.container_.setSizePolicy(sizePolicy)
         self.container_.setAccessibleName("")
         self.container_.setObjectName("container_")
-        self.container = QtWidgets.QHBoxLayout(self.container_)
-        self.container.setContentsMargins(-1, 0, -1, 0)
-        self.container.setObjectName("container")
+        self.container_2 = QtWidgets.QHBoxLayout(self.container_)
+        self.container_2.setContentsMargins(-1, 0, -1, 0)
+        self.container_2.setObjectName("container_2")
         self.line = QtWidgets.QFrame(self.container_)
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.container.addWidget(self.line)
+        self.container_2.addWidget(self.line)
         self.content_ = QtWidgets.QWidget(self.container_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.content_.sizePolicy().hasHeightForWidth())
+        self.content_.setSizePolicy(sizePolicy)
         self.content_.setObjectName("content_")
         self.content = QtWidgets.QVBoxLayout(self.content_)
         self.content.setContentsMargins(1, 0, 1, 0)
@@ -251,6 +255,8 @@ class Ui_Dialog(object):
         self.content.addWidget(self.add_site_btn)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.content.addItem(spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 5, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.content.addItem(spacerItem2)
         self.delete_site = QtWidgets.QPushButton(self.content_)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
@@ -268,27 +274,37 @@ class Ui_Dialog(object):
         self.delete_site.setFlat(True)
         self.delete_site.setObjectName("delete_site")
         self.content.addWidget(self.delete_site)
-        self.container.addWidget(self.content_)
-        self.hboxlayout.addWidget(self.container_)
+        self.container_2.addWidget(self.content_)
+        self.horizontalLayout.addWidget(self.container_)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 21))
+        self.menubar.setObjectName("menubar")
+        self.menuabout = QtWidgets.QMenu(self.menubar)
+        self.menuabout.setObjectName("menuabout")
+        MainWindow.setMenuBar(self.menubar)
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
+        self.menuabout.addAction(self.actionAbout)
+        self.menubar.addAction(self.menuabout.menuAction())
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-        Dialog.setTabOrder(self.menu_btn, self.fav_btn_example)
-        Dialog.setTabOrder(self.fav_btn_example, self.add_site_btn)
-        Dialog.setTabOrder(self.add_site_btn, self.settings_btn)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.menu_btn.setToolTip(_translate("Dialog", "Menu"))
-        self.fav_btn_example.setText(_translate("Dialog", "Hello"))
-        self.plus_site.setToolTip(_translate("Dialog", "add one more site"))
-        self.settings_btn.setToolTip(_translate("Dialog", "Settings"))
-        self.message_label.setText(_translate("Dialog", "To see your site status, please add it to site list."))
-        self.url_label.setText(_translate("Dialog", "URL:"))
-        self.url.setText(_translate("Dialog", "TextLabel"))
-        self.status_label.setText(_translate("Dialog", "Status:"))
-        self.status.setText(_translate("Dialog", "OMG"))
-        self.site_settings.setText(_translate("Dialog", "Site settings"))
-        self.add_site_btn.setText(_translate("Dialog", "Add site"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.menu_btn.setToolTip(_translate("MainWindow", "Menu"))
+        self.fav_btn_example.setText(_translate("MainWindow", "Hello"))
+        self.plus_site.setToolTip(_translate("MainWindow", "add one more site"))
+        self.settings_btn.setToolTip(_translate("MainWindow", "Settings"))
+        self.message_label.setText(_translate("MainWindow", "To see your site status, please add it to site list."))
+        self.url_label.setText(_translate("MainWindow", "URL:"))
+        self.url.setText(_translate("MainWindow", "TextLabel"))
+        self.status_label.setText(_translate("MainWindow", "Status:"))
+        self.status.setText(_translate("MainWindow", "OMG"))
+        self.site_settings.setText(_translate("MainWindow", "Site settings"))
+        self.add_site_btn.setText(_translate("MainWindow", "Add site"))
+        self.menuabout.setTitle(_translate("MainWindow", "SiteMonster"))
+        self.actionAbout.setText(_translate("MainWindow", "About"))
 
