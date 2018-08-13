@@ -19,6 +19,7 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
+import sys
 
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 from PyQt5.QtGui import QIcon
@@ -77,6 +78,8 @@ class UpdateToolWindow(QWidget):
 
         if self.updater is not None:
             self.updater.cancel = True
+            self.updater.join()
+        sys.exit()
 
     def initUI(self):
         """Create and setup gui elements."""
