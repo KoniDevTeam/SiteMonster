@@ -86,7 +86,7 @@ def ask_user_for_update() -> bool:
 
 def run_updater():
     run('updater')
-    exit(0)
+    sys.exit()
 
 
 def update_updater():
