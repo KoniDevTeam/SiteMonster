@@ -66,7 +66,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Site Monster - приложение для администраторов сайтов, которое мгновенно сообщит вам если ваш сайт упал. Данное приложение разрабывается нами - молодой и перспективной командой разработчиков Koni Dev Team. Мы рабоатет что бы улучшить это приложение, сделать его стабильным и еще более полезным. Вы можете помочь нам, исправляя баги или создовая новые функции на странице нашего проекта &lt;a href=&quot;https://github.com/Nekit10/SiteMonster&quot;&gt;GitHub&lt;/a&gt;. Или вы можете пожертвовать деньги на разроботку. Для этого отпарвьте деньги на одну из следущих карт с подписью На разроботку Site Monster:</string>
+       <string>Site Monster is an app for site admins, which will immediately notify you when your site goes down. This app is being developed by us, a young and promising team called 'Koni Dev Team'. We work to make this app better, stabler and much more useful.You can help us by fixing bugs or creating new features. Get more info in 'Contribution' section of ReadMe.md on our &lt;a href=\&quot;https://github.com/Nekit10/SiteMonster\&quot;&gt;GitHub&lt;/a&gt; page. Also you can donate money. Just send money on one of these cards with a note 'On SiteMonster developing':</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
