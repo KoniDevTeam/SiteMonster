@@ -315,7 +315,7 @@ class Ui_MainWindow(object):
         self.fav_btn_example.setText(_translate("MainWindow", "Hello"))
         self.plus_site.setToolTip(_translate("MainWindow", "add one more site"))
         self.settings_btn.setToolTip(_translate("MainWindow", "Settings"))
-        self.message_label.setText(_translate("MainWindow", "To see your site status, please add it to site list."))
+        self.message_label.setText(_translate("MainWindow", "To see your site status, please add it to the site list."))
         self.url_label.setText(_translate("MainWindow", "URL:"))
         self.url.setText(_translate("MainWindow", "TextLabel"))
         self.status_label.setText(_translate("MainWindow", "Status:"))

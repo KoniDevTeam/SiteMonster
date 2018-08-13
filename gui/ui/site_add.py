@@ -95,7 +95,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.name_label.setText(_translate("Dialog", "Let`s give your site a name"))
         self.name.setPlaceholderText(_translate("Dialog", "Say hello to ..."))
-        self.url_label.setText(_translate("Dialog", "Enter it`s URL"))
+        self.url_label.setText(_translate("Dialog", "Enter its URL"))
         self.url.setPlaceholderText(_translate("Dialog", "It will be accsessible via ..."))
         self.continue_btn.setText(_translate("Dialog", "Continue"))
         self.cancel.setText(_translate("Dialog", "Cancel"))

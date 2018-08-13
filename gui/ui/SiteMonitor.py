@@ -76,7 +76,7 @@ class SiteMonitor(QtWidgets.QMainWindow, monitor.Ui_MainWindow):
                     if not self.sites[key]['favourite']:
                         self.fav_sites.hide()
             self.add_site_btn.hide()
-            self.message_label.setText("Select site from list.")
+            self.message_label.setText("Select a site from the list.")
 
         self.add_site_btn.clicked.connect(self.add_site_onclick)
         self.plus_site.clicked.connect(self.add_site_onclick)
@@ -108,7 +108,7 @@ class SiteMonitor(QtWidgets.QMainWindow, monitor.Ui_MainWindow):
         def get_site_info():
             log.debug('Getting info about \'' + name + '\'')
             self.site = name
-            self.message_label.setText('Info about [SITENAME]'.replace('[SITENAME]', name))
+            self.message_label.setText('[SITENAME] info'.replace('[SITENAME]', name))
             self.description_.show()
             self.url.setText(self.sites[name]['url'])
             self.setCursor(QtGui.QCursor(QtCore.Qt.BusyCursor))

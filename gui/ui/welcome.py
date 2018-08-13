@@ -134,7 +134,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.welcome_header.setText(_translate("Dialog", "Welcome to SiteMonster!"))
-        self.welcome_title.setText(_translate("Dialog", "This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)"))
+        self.welcome_title.setText(_translate("Dialog", "This app will notify you about any change of your server condition. And it can produce a loud sound if something went wrong :)"))
         self.label_2.setText(_translate("Dialog", "Let\'s start using it\n"
 "and make some noise!"))
         self.start_btn.setText(_translate("Dialog", "Start"))
