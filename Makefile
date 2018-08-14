@@ -14,7 +14,11 @@ all:
 	LC_ALL=C find ./ -name "*audioop*.so" -print -quit 2>&1 | grep -v "Permission denied" | xargs -I{} mv {} dist/audioop.so
 	cp LICENSE dist/
 prep:
+
 	pip3 install pyaudio
+	pip3 install requests
+	pip3 install psutil
+	sudo apt-get install -y python3-pyqt5 pyqt5-dev-tools
 deb:
 snap:
 rpm:
