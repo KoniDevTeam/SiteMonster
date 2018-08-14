@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Version=v1.0
+Name=Site Monster Daemon
+Comment=Site Monster is an app for site admins, which will immediately notify you when your site goes down.
+Path=/opt/SiteMonster/
+Exec=/opt/SiteMonster/daemon
+Icon=/opt/SiteMonster/media/logo.ico
+Terminal=false
+Categories=Net

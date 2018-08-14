@@ -10,3 +10,4 @@ APP_VERSION_ID = 0
 UPDATER_VERSION_ID = 0
 
 API_DOMAIN = 'http://itgrusha.com'
+a
