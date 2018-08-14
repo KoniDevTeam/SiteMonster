@@ -45,7 +45,7 @@ def save_sites_list(sites_obj: dict):
     files.save(sites_obj, SITES_LIST_FILE)
 
 
-def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = '../media/logo.ico'):
+def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = files.get_media_folder_path() + '/logo.ico'):
     """Add url to sites list.
 
     Generate settings dictionary by `build_settings` method.

@@ -18,6 +18,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from api import files
+
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -32,22 +35,22 @@ class Ui_Dialog(object):
 "    width: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked{\n"
-"    image: url(../media/checkbox-off.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-off.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:hover{\n"
-"    image: url(../media/checkbox-off-hover.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-off-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:pressed{\n"
-"    image: url(../media/checkbox-off-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked{\n"
-"    image: url(../media/checkbox-on.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover{\n"
-"    image: url(../media/checkbox-on-hover.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed{\n"
-"    image: url(../media/checkbox-on-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/checkbox-on-pressed.png);\n"
 "}\n"
 "\n"
 "")
@@ -212,22 +215,22 @@ class Ui_Dialog(object):
 "    height: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked {\n"
-"    image: url(../media/star-off.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-off.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:hover {\n"
-"    image: url(../media/star-off-hover.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-off-hover.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:pressed {\n"
-"    image: url(../media/star-off-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked {\n"
-"    image: url(../media/star-on.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover {\n"
-"    image: url(../media/star-on-hover.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed {\n"
-"    image: url(../media/star-on-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path() + "/star-on-pressed.png);\n"
 "}")
         self.favourite.setObjectName("favourite")
         self.formLayout_2.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.favourite)

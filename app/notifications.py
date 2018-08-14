@@ -28,7 +28,7 @@ import pyaudio
 from PyQt5 import Qt
 
 import appinfo
-from api import osinfo
+from api import osinfo, files
 
 
 def send_old_windows_notification(message: str):
@@ -118,7 +118,7 @@ def play_sound():
 
     logging.info('Playing sound')
 
-    f = wave.open(r"../media/alarm.wav", "rb")
+    f = wave.open(files.get_media_folder_path() + r"/alarm.wav", "rb")
     p = pyaudio.PyAudio()
     stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
                     channels=f.getnchannels(),

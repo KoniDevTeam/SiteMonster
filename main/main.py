@@ -27,15 +27,15 @@ from PyQt5 import QtWidgets
 
 from app import logger
 from gui.ui.SiteMonster import SiteMonster
-from api import osinfo, updates, updater_updates
+from api import osinfo, updates, updater_updates, files
 
 
 def run(name: str):
     logging.debug('Running ' + name)
     if osinfo.is_win():
-        subprocess.Popen([name + '.exe'])
+        subprocess.Popen([os.path.dirname(sys.executable) + '/' + name + '.exe'])
     elif osinfo.is_linux():
-        subprocess.Popen([name])
+        subprocess.Popen([os.path.dirname(sys.executable) + '/' + name ])
     else:
         raise OSError(platform.system() + 'is not supported!')
 

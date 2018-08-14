@@ -22,6 +22,7 @@ import os
 import json
 import logging
 import platform
+import sys
 
 from api.osinfo import is_win, is_linux, is_mac_os
 
@@ -106,3 +107,12 @@ def read(filename: str):
     f.close()
 
     return obj
+
+
+def get_media_folder_path():
+    """Return abs path for '..' folder, or for '.' in exe"""
+
+    if getattr(sys, 'frozen', False):
+        return os.path.abspath(os.path.dirname(sys.executable) + '/media')
+    elif __file__:
+        return os.path.abspath(os.path.dirname(__file__) + '/../media')
