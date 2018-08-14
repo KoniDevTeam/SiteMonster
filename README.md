@@ -1,7 +1,7 @@
 # SiteMonster
 App that checks your website availability and sends notification to you if it is down.
 
-**Platform**: **Windows/Linux** (**Debain/Ubuntu/Mint** *(deb packages, snap)*, **RHEL/CentOS/Fedora** *(rpm packages)*, **other linux** *(source compile)*)
+**Platform**: **Windows/Linux** (**Debain/Ubuntu/Mint** *(deb packages)*, **RHEL/CentOS/Fedora** *(rpm packages)*, **other linux** *(source compile)*)
 ## Download latest version
 We will release the first version soon.
 ## Install from source on linux
