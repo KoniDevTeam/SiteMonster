@@ -22,11 +22,12 @@ import os
 
 import app.notifications as notify
 from app import logger, site
-from api import osinfo, sites
+from api import sites
+import appinfo
 
 
 def save_pid():
-    f = open(osinfo.PID_FILE, 'w')
+    f = open(appinfo.PID_FILE, 'w')
     f.write(str(os.getpid()))
     f.close()
 
