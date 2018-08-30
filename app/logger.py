@@ -29,7 +29,7 @@ def init_log(sess_name):
     logging.basicConfig(format=u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
                         level=logging.DEBUG)
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s',
-                        level=logging.DEBUG, filename=files.get_data_folder() + 'latest-' + sess_name + '.log')
+                        level=logging.DEBUG, filename=files.get_and_create_data_folder() + 'latest-' + sess_name + '.log')
 
 def log_pc_info():
     logging.info("Machine - " + platform.machine())

@@ -31,7 +31,7 @@ def get_sites_dict() -> dict:
 
     logging.info('Getting dict with lists of websites')
 
-    if os.path.exists(files.get_data_folder() + SITES_LIST_FILE):
+    if os.path.exists(files.get_and_create_data_folder() + SITES_LIST_FILE):
         return files.read(SITES_LIST_FILE)
     else:
         return dict()
