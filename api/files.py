@@ -65,7 +65,7 @@ def get_data_folder_linux() -> str:
     return path
 
 
-def get_data_folder() -> str:
+def get_and_create_data_folder() -> str:
     """Gets data folder.
 
     For more information see docs for  functions `get_data_folder_windows`,
@@ -75,14 +75,21 @@ def get_data_folder() -> str:
 
     logging.debug("Getting user's data folder")
 
+    folder = None
+
     if is_win():
-        return get_data_folder_windows()
+        folder =  get_data_folder_windows()
     elif is_linux():
-        return get_data_folder_linux()
+        folder = get_data_folder_linux()
     elif is_mac_os():
-        return get_data_folder_macos()
+        folder = get_data_folder_macos()
     else:
         raise OSError("Unknown OS: " + platform.system())
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    return folder
 
 
 def save(obj: object, filename: str):
@@ -90,7 +97,7 @@ def save(obj: object, filename: str):
 
     logging.debug("Saving " + str(obj) + ' to ' + filename)
 
-    f = open(get_data_folder() + filename, "w")
+    f = open(get_and_create_data_folder() + filename, "w")
     f.write(json.dumps(obj))
     f.close()
 
@@ -100,7 +107,7 @@ def read(filename: str):
 
     logging.debug('Reading object from ' + filename)
 
-    f = open(get_data_folder() + filename, "r")
+    f = open(get_and_create_data_folder() + filename, "r")
 
     obj = json.loads(f.read())
 

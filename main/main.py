@@ -17,6 +17,7 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
+import shutil
 import sys
 import os
 import psutil
@@ -25,6 +26,7 @@ import subprocess
 
 from PyQt5 import QtWidgets
 
+import appinfo
 from app import logger
 from gui.ui.SiteMonster import SiteMonster
 from api import osinfo, updates, updater_updates, files
@@ -48,11 +50,11 @@ def run_daemon():
 
 
 def run_daemon_if_it_is_not_running():
-    if not os.path.exists(osinfo.PID_FILE):
+    if not os.path.exists(appinfo.PID_FILE):
         run_daemon()
     else:
         try:
-            f = open(osinfo.PID_FILE, 'r')
+            f = open(appinfo.PID_FILE, 'r')
 
             pid = int(f.read().strip())
 
@@ -113,7 +115,17 @@ def main():
     sys.exit(app.exec_())
 
 
+def add_in_startup():
+    if getattr(sys, 'frozen', False):
+        path = os.getenv('HOME') + '/.config/autostart/'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        shutil.copyfile('/usr/share/applications/daemon.desktop', path + '/Site Monster Daemon.desktop')
+
+
 if __name__ == '__main__':
+    if osinfo.is_linux():
+        add_in_startup()
     logger.init_log('app')
     logger.log_pc_info()
     logging.info('Starting app')
