@@ -1,0 +1,9 @@
+Package: sitemonster
+Version: 1.0-1
+Provides: sitemonster
+Maintainer: Nikita Serba <nikitaserba@icloud.com>
+Architecture: all
+Section: net
+Description: Site Monster is an app for site admins, which will immediately notify you when your site goes down.
+Depends: bzip2, openssl, expat, libidn2-0
+

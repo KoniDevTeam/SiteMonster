@@ -15,6 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+from api import files
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'gui/ui/monitor.ui'
@@ -25,15 +26,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from api import files
-
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(640, 480)
         MainWindow.setMinimumSize(QtCore.QSize(640, 480))
-        MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
+        MainWindow.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -50,8 +48,8 @@ class Ui_MainWindow(object):
         self.menu_vert_2.setContentsMargins(0, 0, 0, -1)
         self.menu_vert_2.setSpacing(6)
         self.menu_vert_2.setObjectName("menu_vert_2")
-        self.menu_btn = QtWidgets.QPushButton(self.menu_vert_)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
+        self.menu_btn = QtWidgets.QCheckBox(self.menu_vert_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.menu_btn.sizePolicy().hasHeightForWidth())
@@ -62,46 +60,50 @@ class Ui_MainWindow(object):
         self.menu_btn.setBaseSize(QtCore.QSize(24, 24))
         self.menu_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.menu_btn.setToolTipDuration(1)
-        self.menu_btn.setStyleSheet("QPushButton{\n"
-"    width: 24px;\n"
-"    height: 24px;\n"
+        self.menu_btn.setStyleSheet("QCheckBox::indicator{\n"
+"    width: 32px;\n"
+"    height: 32px;\n"
 "}\n"
-"QPushButton[state=\"false\"]{\n"
-"    border-image: url(" + files.get_media_folder_path() + "/menu.png) 24px;\n"
+"QCheckBox::indicator:unchecked{\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/menu.png);\n"
 "}\n"
-"QPushButton[state=\"true\"]{\n"
-"    border-image: url(" + files.get_media_folder_path() + "/back.png) 24px;\n"
+"QCheckBox::indicator:checked{\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/back.png);\n"
 "}")
         self.menu_btn.setText("")
         self.menu_btn.setIconSize(QtCore.QSize(24, 24))
-        self.menu_btn.setCheckable(False)
-        self.menu_btn.setDefault(False)
-        self.menu_btn.setFlat(True)
-        self.menu_btn.setProperty("state", False)
+        self.menu_btn.setCheckable(True)
+        self.menu_btn.setTristate(False)
         self.menu_btn.setObjectName("menu_btn")
         self.menu_vert_2.addWidget(self.menu_btn)
         self.fav_only_checkbox = QtWidgets.QCheckBox(self.menu_vert_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fav_only_checkbox.sizePolicy().hasHeightForWidth())
+        self.fav_only_checkbox.setSizePolicy(sizePolicy)
+        self.fav_only_checkbox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.fav_only_checkbox.setStyleSheet("QCheckBox::indicator {\n"
 "    height: 24px;\n"
 "    width: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:hover{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:pressed{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on-pressed.png);\n"
 "}\n"
 "\n"
 "")
@@ -318,7 +320,7 @@ class Ui_MainWindow(object):
         self.fav_btn_example.setText(_translate("MainWindow", "Hello"))
         self.plus_site.setToolTip(_translate("MainWindow", "add one more site"))
         self.settings_btn.setToolTip(_translate("MainWindow", "Settings"))
-        self.message_label.setText(_translate("MainWindow", "To see your site status, please add it to the site list."))
+        self.message_label.setText(_translate("MainWindow", "To see your site status, please add it to site list."))
         self.url_label.setText(_translate("MainWindow", "URL:"))
         self.url.setText(_translate("MainWindow", "TextLabel"))
         self.status_label.setText(_translate("MainWindow", "Status:"))

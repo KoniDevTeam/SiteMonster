@@ -15,11 +15,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+from api import files
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'gui/ui/site_settings.ui'
+#
+# Created by: PyQt5 UI code generator 5.10.1
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-from api import files
-
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -35,22 +40,22 @@ class Ui_Dialog(object):
 "    width: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:hover{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:unchecked:pressed{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-off-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed{\n"
-"    image: url(" + files.get_media_folder_path() + "/checkbox-on-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/checkbox-on-pressed.png);\n"
 "}\n"
 "\n"
 "")
@@ -215,22 +220,22 @@ class Ui_Dialog(object):
 "    height: 24px;\n"
 "}\n"
 "QCheckBox::indicator:unchecked {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-off.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-off.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:hover {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-off-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-off-hover.png);\n"
 "} \n"
 "QCheckBox::indicator:unchecked:pressed {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-off-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-off-pressed.png);\n"
 "}\n"
 "QCheckBox::indicator:checked {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-on.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-on.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:hover {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-on-hover.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-on-hover.png);\n"
 "}\n"
 "QCheckBox::indicator:checked:pressed {\n"
-"    image: url(" + files.get_media_folder_path() + "/star-on-pressed.png);\n"
+"    image: url(" + files.get_media_folder_path().replace('\\', '/') + "/star-on-pressed.png);\n"
 "}")
         self.favourite.setObjectName("favourite")
         self.formLayout_2.setWidget(14, QtWidgets.QFormLayout.SpanningRole, self.favourite)
@@ -315,8 +320,8 @@ class Ui_Dialog(object):
         self.https_proxy_label.setText(_translate("Dialog", "Proxies HTTPS"))
         self.http_codes_label.setText(_translate("Dialog", "HTTP expected codes (comma-separated)"))
         self.expected_lable.setText(_translate("Dialog", "Expected server response"))
-        self.notification.setText(_translate("Dialog", "Send notification if server is not responding"))
-        self.sound.setText(_translate("Dialog", "Play sound if server is not responding"))
+        self.notification.setText(_translate("Dialog", "Send notification if server not responding"))
+        self.sound.setText(_translate("Dialog", "Play sound if server not responding"))
         self.favourite.setText(_translate("Dialog", "Favourite"))
         self.icon_label.setText(_translate("Dialog", "Icon"))
         self.save.setText(_translate("Dialog", "Save settings and quit"))

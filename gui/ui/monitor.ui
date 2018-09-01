@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1920</width>
-    <height>1080</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -55,9 +55,9 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="menu_btn">
+        <widget class="QCheckBox" name="menu_btn">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -96,15 +96,15 @@
           <number>1</number>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton{
-	width: 24px;
-	height: 24px;
+          <string notr="true">QCheckBox::indicator{
+	width: 32px;
+	height: 32px;
 }
-QPushButton[state=&quot;false&quot;]{
-	border-image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/menu.png) 24px;
+QCheckBox::indicator:unchecked{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/menu.png);
 }
-QPushButton[state=&quot;true&quot;]{
-	border-image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/back.png) 24px;
+QCheckBox::indicator:checked{
+	image: url(C:/Users/MrGra/Documents/Git/SiteMonster/media/back.png);
 }</string>
          </property>
          <property name="text">
@@ -117,21 +117,24 @@ QPushButton[state=&quot;true&quot;]{
           </size>
          </property>
          <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
           <bool>true</bool>
          </property>
-         <property name="state" stdset="0">
+         <property name="tristate">
           <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="fav_only_checkbox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">QCheckBox::indicator {
 	height: 24px;
