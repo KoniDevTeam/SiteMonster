@@ -3,7 +3,7 @@ App that checks your website availability and sends notification to you if it is
 
 **Platform**: **Windows/Linux** (**Debain/Ubuntu/Mint** *(deb packages)*, **RHEL/CentOS/Fedora** *(rpm packages)*, **other linux** *(source compile)*)
 ## Download latest version
-We will release the first version soon.
+You can download Site Monster 1.0 [here](https://github.com/KoniDevTeam/SiteMonster/releases/tag/v1.0)
 ## Install from source on linux
 Download latest source code from [here](https://github.com/KoniDevTeam/SiteMonster/releases).
 Unzip source and run this in source folder:
