@@ -1,28 +1,51 @@
 """Edit sites list."""
 
+# Copyright (C) 2018 Koni Dev Team, All Rights Reserved
+# https://github.com/KoniDevTeam/SiteMonster/
+#
+# This file is part of Site Monster.
+#
+# Site Monster is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Site Monster is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
+import logging
 
 from api import files
 
 SITES_LIST_FILE = 'siteList.json'
 
 
-def get_sites_list() -> dict:
-    """Read sites list from json."""
+def get_sites_dict() -> dict:
+    """Read sites and sites' properties to dict from json."""
 
-    if os.path.exists(files.get_data_folder() + SITES_LIST_FILE):
+    logging.info('Getting dict with lists of websites')
+
+    if os.path.exists(files.get_and_create_data_folder() + SITES_LIST_FILE):
         return files.read(SITES_LIST_FILE)
     else:
         return dict()
 
 
-def save_sites_list(sites_obj: object):
+def save_sites_list(sites_obj: dict):
     """Save sites list to file."""
+
+    logging.info("Saving websites")
 
     files.save(sites_obj, SITES_LIST_FILE)
 
 
-def add(name: str, url: str, settings: dict):
+def add(name: str, url: str, settings: dict, favourite: bool = False, favicon: str = files.get_media_folder_path() + '/logo.ico'):
     """Add url to sites list.
 
     Generate settings dictionary by `build_settings` method.
@@ -31,12 +54,15 @@ def add(name: str, url: str, settings: dict):
 
     """
 
-    sites = get_sites_list()
+    logging.info('Adding new website ' + name + '<' + url + '>')
+
+    sites = get_sites_dict()
 
     if name in sites.keys():
-        return NameError('Name already exists.')
+        logging.error('Name already exists')
+        raise NameError('Name already exists.')
 
-    sites[name] = {'url': url, 'settings': settings}
+    sites[name] = {'url': url, 'settings': settings, 'favourite': favourite, 'favicon': favicon}
     save_sites_list(sites)
 
 
@@ -47,10 +73,13 @@ def delete(name: str):
 
     """
 
-    sites = get_sites_list()
+    logging.info('Deleting website ' + name)
+
+    sites = get_sites_dict()
 
     if name not in sites.keys():
-        return NameError('Name not exists.')
+        logging.error('Name not exists')
+        raise NameError('Name not exists.')
 
     del sites[name]
     save_sites_list(sites)
@@ -63,12 +92,16 @@ def rename(old_name: str, new_name: str):
 
     """
 
-    sites = get_sites_list()
+    logging.info('Renaming website ' + old_name + ' to ' + new_name)
+
+    sites = get_sites_dict()
 
     if old_name not in sites.keys():
-        return NameError('Old name not exists.')
+        logging.error('old name not exists')
+        raise NameError('Old name not exists.')
     if new_name in sites.keys():
-        return NameError('New name already exists.')
+        logging.error('New name already exists')
+        raise NameError('New name already exists.')
 
     sites[new_name] = sites.pop(old_name)
     save_sites_list(sites)
@@ -83,19 +116,42 @@ def change_settings(name: str, settings: dict):
 
     """
 
-    sites = get_sites_list()
+    logging.info('Changing ' + name + "'s settings")
+
+    sites = get_sites_dict()
 
     if name not in sites.keys():
-        return NameError('Name not exists.')
+        raise NameError('Name not exists.')
 
-    sites[name]["settings"] = settings
+    sites[name]['settings'] = settings
     save_sites_list(sites)
+
+
+def set_favourite(name: str, favourite: bool):
+    sites = get_sites_dict()
+
+    if name not in sites.keys():
+        raise NameError('Name not exists.')
+
+    sites[name]['favourite'] = favourite
+    save_sites_list(sites)
+
+
+def set_site_icon(name, icon_path):
+    sites = get_sites_dict()
+    if name in sites.keys():
+        sites[name]['favicon'] = icon_path
+        save_sites_list(sites)
+    else:
+        raise ('Site not exists error')
 
 
 def get_list() -> list:
     """Get list of sites' names"""
 
-    return list(get_sites_list().keys())
+    logging.info("Getting ist of sites' names")
+
+    return list(get_sites_dict().keys())
 
 
 def build_settings(method='GET', headers=None, body='', proxy=None, expected_code=None, expected_answer=None,
@@ -112,6 +168,8 @@ def build_settings(method='GET', headers=None, body='', proxy=None, expected_cod
 
     """
 
+    logging.debug('Generating settings dict')
+
     if fail_actions is None:
         fail_actions = build_fail_actions()
 
@@ -126,5 +184,7 @@ def build_fail_actions(send_notification=True, play_sound=True) -> dict:
     play_sound - bool, if True plays alarm sound on your PC to PC (`play_sound` method in `app/notifications.py`).
 
     """
+
+    logging.debug('Generating fail_actions dict')
 
     return {'send_notification': send_notification, 'play_sound': play_sound}
