@@ -20,7 +20,6 @@
 
 import os
 import json
-import logging
 import platform
 import sys
 
@@ -37,7 +36,6 @@ def get_data_folder_windows() -> str:
     """
 
     path = os.getenv('APPDATA') + '/' + PATH
-    logging.debug("Got windows folder: " + path)
     return path
 
 
@@ -49,7 +47,6 @@ def get_data_folder_macos() -> str:
     """
 
     path = os.getenv('HOME') + '/Library/Preferences/' + PATH
-    logging.debug("Got macOS folder: " + path)
     return path
 
 
@@ -61,7 +58,6 @@ def get_data_folder_linux() -> str:
     """
 
     path = os.getenv('HOME') + '/.' + PATH
-    logging.debug("Got linux folder: " + path)
     return path
 
 
@@ -72,8 +68,6 @@ def get_and_create_data_folder() -> str:
     `get_data_folder_macos` and `get_data_folder_linux`.
 
     """
-
-    logging.debug("Getting user's data folder")
 
     folder = None
 
@@ -95,8 +89,6 @@ def get_and_create_data_folder() -> str:
 def save(obj: object, filename: str):
     """Make a json from obj and save to filename in data folder."""
 
-    logging.debug("Saving " + str(obj) + ' to ' + filename)
-
     f = open(get_and_create_data_folder() + filename, "w")
     f.write(json.dumps(obj))
     f.close()
@@ -104,8 +96,6 @@ def save(obj: object, filename: str):
 
 def read(filename: str):
     """Gets json from filename and loads it to dictionary/list."""
-
-    logging.debug('Reading object from ' + filename)
 
     f = open(get_and_create_data_folder() + filename, "r")
 

@@ -22,7 +22,7 @@ from PyQt5 import QtWidgets
 from gui.ui import site_settings
 from api.gui import *
 from app import site
-import logging as log
+from logapi import logging as log
 
 
 class SiteSettings(QtWidgets.QDialog, site_settings.Ui_Dialog):

@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
+from logapi import logging_daemon as logging
 
 import requests
 

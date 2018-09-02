@@ -22,7 +22,7 @@ import wave
 import os
 import sys
 import platform
-import logging
+from logapi import logging
 
 import pyaudio
 from PyQt5 import Qt

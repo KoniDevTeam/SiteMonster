@@ -17,11 +17,11 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import time
-import logging
+from logapi import logging_daemon as logging
 import os
 
 import app.notifications as notify
-from app import logger, site
+from app import site
 from api import sites
 import appinfo
 
@@ -45,8 +45,6 @@ def check_site(name: str, site_data: dict):
 
 if __name__ == '__main__':
     save_pid()
-    logger.init_log('daemon')
-    logger.log_pc_info()
     while True:
         sites_dict = site.get_sites_dict()
         for i, j in sites_dict.items():

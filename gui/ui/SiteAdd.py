@@ -22,7 +22,7 @@ from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
 from app import site
 from api import osinfo
-import logging as log
+from logapi import logging as log
 
 
 class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):

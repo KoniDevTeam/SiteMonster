@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
+from logapi import logging
 import shutil
 import sys
 import os
@@ -27,7 +27,6 @@ import subprocess
 from PyQt5 import QtWidgets
 
 import appinfo
-from app import logger
 from gui.ui.SiteMonster import SiteMonster
 from api import osinfo, updates, updater_updates, files
 
@@ -46,7 +45,8 @@ def run_daemon():
     try:
         run('daemon')
     except Exception as e:
-        logging.error("Can't start daemon: " + str(e))
+        print("EXCEPTION - " + str(e))
+        logging.error("Can't start daemon: ")
 
 
 def run_daemon_if_it_is_not_running():
@@ -126,8 +126,6 @@ def add_in_startup():
 if __name__ == '__main__':
     if osinfo.is_linux():
         add_in_startup()
-    logger.init_log('app')
-    logger.log_pc_info()
     logging.info('Starting app')
     run_daemon_if_it_is_not_running()
     main()
