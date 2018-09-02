@@ -21,14 +21,8 @@
 import platform
 
 
-def is_win10() -> bool:
-    is_win_10 = is_win() and '10' in platform.release()
-
-    return is_win_10
-
-
 def is_win() -> bool:
-    is_win_ = 'Windows' in platform.system()
+    is_win_ = 'Windows' in platform.system() and '10' in platform.release() or '8' in platform.release()
 
     return is_win_
 

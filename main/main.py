@@ -106,6 +106,9 @@ def update_updater():
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    if not (osinfo.is_linux() or osinfo.is_mac_os() or osinfo.is_win()):
+        not_valid_os()
+        exit(1)
     test_for_update()
     thr = update_updater()
     window = SiteMonster()
@@ -121,6 +124,12 @@ def add_in_startup():
         if not os.path.exists(path):
             os.makedirs(path)
         shutil.copyfile('/usr/share/applications/daemon.desktop', path + '/Site Monster Daemon.desktop')
+
+
+def not_valid_os():
+    QtWidgets.QMessageBox.information(QtWidgets.QMessageBox(), "Can't start",
+                                                  "This app don't support this os",
+                                                  QtWidgets.QMessageBox.Ok)
 
 
 if __name__ == '__main__':
