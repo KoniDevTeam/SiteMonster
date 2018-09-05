@@ -42,6 +42,7 @@ def check(site: dict) -> bool:
 ```
 * Write pydocs if it's needed
 * Write unit tests for your code (python unittest) and put it in "tests" folder
+* Place copyright and licence header in top of every file, you can find example in any project source file
 * Before starting pull request, run all unit tests to make sure that you did not break anything
 * Add your name to list of contributors in end of this file
 ## License
