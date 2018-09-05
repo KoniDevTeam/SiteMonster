@@ -26,9 +26,13 @@ You can check your webites' availability directly in the app interface. Also, ev
 * Bad links search (v1.2)
 ## Contribution
 You can freely contribute to our github. There're many things you can do: fix bugs, add new features, make translations. Please follow several simple rules:
+* Create one issue per one bug
+* Do not duplicate issues
+* Specify the platform in issues
+* Specify steps to reproduce in issues
 * Create one pull request per one feature
 * Create one commit for one small piece of implementation
-* Write simple functions. Every function must do one small thing. All actions in function must be on one abstraction level.
+* Write simple functions. Every function must do one small thing. All actions in function must be on one abstraction level
 * Specify type of return value and arguments, e.g.
 ```python 
 def check(site: dict) -> bool:
@@ -38,8 +42,8 @@ def check(site: dict) -> bool:
 ```
 * Write pydocs if it's needed
 * Write unit tests for your code (python unittest) and put it in "tests" folder
-* Before starting pull request, run all unit tests to make sure that you did not break anything.
-* Add your name to list of contributors in end of this file.
+* Before starting pull request, run all unit tests to make sure that you did not break anything
+* Add your name to list of contributors in end of this file
 ## License
 ![GNU GPL v3 logo](https://www.gnu.org/graphics/gplv3-127x51.png)
 
