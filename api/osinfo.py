@@ -22,7 +22,7 @@ import platform
 
 
 def is_win() -> bool:
-    is_win_ = 'Windows' in platform.system() and '10' in platform.release() or '8' in platform.release()
+    is_win_ = 'Windows' in platform.system() and '10' in platform.release()
 
     return is_win_
 
