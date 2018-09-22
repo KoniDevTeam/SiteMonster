@@ -1,25 +1,28 @@
-from sclogger import Logger, MessageType
+from pyloges.logger import Logger
+from pyloges.classes.config import Config
+from pyloges.handlers.file import FileHandler
 
 from api import files
 
-logger = Logger(files.get_and_create_data_folder() + "/updater.log")
+logger = Logger(Config())
+logger.config.add_handler(FileHandler(files.get_and_create_data_folder() + "updater-latest.log"))
 
 
 def info(msg):
-    logger.message(msg, MessageType.INFO)
+    logger.i(msg)
 
 
 def debug(msg):
-    info(msg)
+    logger.d(msg)
 
 
 def warning(msg):
-    logger.message(msg, MessageType.WARNING)
+    logger.w(msg)
 
 
 def error(msg):
-    logger.message(msg, MessageType.ERROR)
-    
+    logger.e(msg)
+
 
 def critical(msg):
-    logger.message(msg, MessageType.ERROR)
+    logger.f(msg)
