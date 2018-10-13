@@ -19,11 +19,22 @@
 import time
 from logapi import logging_daemon as logging
 import os
+import sys
+from threading import Thread
+
+from PyQt5.QtWidgets import QSystemTrayIcon, QApplication, QAction, QMenu, QMainWindow
+from PyQt5 import QtGui
 
 import app.notifications as notify
 from app import site
 from api import sites
 import appinfo
+
+is_running = True
+
+start_action = None
+stop_action = None
+app = None
 
 
 def save_pid():
@@ -43,11 +54,67 @@ def check_site(name: str, site_data: dict):
         time.sleep(30)
 
 
+def start():
+    global is_running, start_action, stop_action
+    is_running = True
+    start_action.setEnabled(False)
+    stop_action.setEnabled(True)
+
+
+def stop():
+    global is_running, start_action, stop_action
+    is_running = False
+    start_action.setEnabled(True)
+    stop_action.setEnabled(False)
+
+
+def check():
+    while True:
+        if is_running:
+            sites_dict = site.get_sites_dict()
+            for i, j in sites_dict.items():
+                logging.info("Checking " + i)
+                check_site(i, j)
+            time.sleep(1)
+
+
+def close_all():
+    app.quit()
+    exit(0)
+
+
 if __name__ == '__main__':
     save_pid()
-    while True:
-        sites_dict = site.get_sites_dict()
-        for i, j in sites_dict.items():
-            logging.info("Checking " + i)
-            check_site(i, j)
-        time.sleep(1)
+    app = QApplication(sys.argv)
+    # Init QSystemTrayIcon
+    window = QMainWindow(None)
+    tray_icon = QSystemTrayIcon(window)
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap(appinfo.APP_ICON), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    tray_icon.setIcon(icon
+                      )
+    start_action = QAction("Start", window)
+    stop_action = QAction("Stop", window)
+    exit_action = QAction("Exit", window)
+    start_action.setEnabled(False)
+
+    start_action.triggered.connect(start)
+    stop_action.triggered.connect(stop)
+    exit_action.triggered.connect(close_all)
+
+    tray_menu = QMenu()
+    tray_menu.addAction(start_action)
+    tray_menu.addAction(stop_action)
+    tray_menu.addAction(exit_action)
+
+    tray_icon.setContextMenu(tray_menu)
+    tray_icon.show()
+
+    thread1 = Thread(target=check)
+    thread1.daemon = True
+
+    thread1.start()
+
+    app.exec_()
+
+    thread1.join()
