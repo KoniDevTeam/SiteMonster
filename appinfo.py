@@ -1,7 +1,7 @@
 """App info."""
 from api.files import get_and_create_data_folder
 
-PID_FILE = get_and_create_data_folder() + '/../' + 'daemon_pid.tmp'
+PID_FILE = get_and_create_data_folder() + '/' + 'daemon_pid.tmp'
 
 APP_NAME = 'Site Monster'
 APP_ICON = '../media/logo.ico'  # Ну так надо
