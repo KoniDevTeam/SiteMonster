@@ -109,7 +109,7 @@ def read(filename: str):
 def get_media_folder_path():
     """Return abs path for '..' folder, or for '.' in exe"""
 
-    if getattr(sys, 'frozen', False):
+    if hasattr(sys, 'frozen'):
         return os.path.abspath(os.path.dirname(sys.executable) + '/media')
     elif __file__:
         return os.path.abspath(os.path.dirname(__file__) + '/../media')
