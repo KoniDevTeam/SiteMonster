@@ -19,7 +19,7 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import logging
+from logapi import logging
 
 from api import files
 

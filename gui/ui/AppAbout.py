@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging as log
+from logapi import logging as log
 from gui.ui import about
 from PyQt5.QtWidgets import QMainWindow
 

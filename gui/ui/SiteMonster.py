@@ -20,7 +20,7 @@ from PyQt5 import QtWidgets
 from gui.ui import welcome as design
 from gui.ui.SiteMonitor import SiteMonitor
 from api.gui import *
-import logging as log
+from logapi import logging as log
 
 
 class SiteMonster(QtWidgets.QMainWindow, design.Ui_MainWindow):

@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
+from logapi import logging_daemon as logging
 
 import requests
 
@@ -35,9 +35,6 @@ def check(site: dict) -> bool:
 
     url = site['url']
 
-    if '://' not in url:
-        url = 'http://' + url
-
     try:
         r = requests.request(settings['method'], url, headers=settings['headers'], data=settings['body'],
                              proxies=settings['proxy'])
@@ -46,6 +43,14 @@ def check(site: dict) -> bool:
 
     if not success:
         logging.info("Can't send request to " + url)
+        site_ = site.copy()
+        if '://' not in url:
+            site_['url'] = 'http://' + url
+            c = check(site_)
+            if not c:
+                site_['url'] = 'https://' + url
+                c = check(site_)
+            return c
         return False
 
     if not is_status_code_good(settings['expected_code'], r.status_code):

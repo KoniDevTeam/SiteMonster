@@ -22,7 +22,7 @@ from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
 from app import site
 from api import osinfo
-import logging as log
+from logapi import logging as log
 
 
 class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):
@@ -43,11 +43,6 @@ class SiteAdd(QtWidgets.QDialog, site_add.Ui_Dialog):
                 if len(self.url.text()) > 2:
                     log.debug('Opening SiteSettings window for just created site \'' + self.name.text() + '\'')
                     site.add(self.name.text(), self.url.text(), site.build_settings())
-                    if not osinfo.is_linux():
-                        self.settings_window = SiteSettings({'site_name': self.name.text()})
-                        geometry = self.geometry()
-                        self.settings_window.setGeometry(geometry)
-                        self.settings_window.show()
                     self.hide()
             else:
                 QtWidgets.QMessageBox.information(self, 'Message', 'Name must be unique',
