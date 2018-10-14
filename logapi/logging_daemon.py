@@ -1,10 +1,15 @@
+import sys
+
 from pyloges.logger import Logger
 from pyloges.classes.config import Config
 from pyloges.handlers.file import FileHandler
 
 from api import files
 
-logger = Logger(Config())
+if hasattr(sys, 'frozen'):
+    logger = Logger(Config(print_to_std=False))
+else:
+    logger = Logger(Config())
 logger.config.add_handler(FileHandler(files.get_and_create_data_folder() + "daemon-latest.log"))
 
 

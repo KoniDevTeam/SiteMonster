@@ -28,6 +28,7 @@ from PyQt5 import QtGui
 import app.notifications as notify
 from app import site
 from api import sites
+from api import files
 import appinfo
 
 is_running = True
@@ -49,7 +50,9 @@ def check_site(name: str, site_data: dict):
         if fail_actions['send_notification']:
             logging.warning('Site %s is down!!!' % name)
             notify.send_notification('Site %s is down!!!' % name)
-        if fail_actions['play_sound']:
+        #if fail_actions['play_sound']:
+        if True:
+            logging.warning('Playing sound!')
             notify.play_sound()
         time.sleep(30)
 
@@ -69,13 +72,12 @@ def stop():
 
 
 def check():
-    while True:
-        if is_running:
-            sites_dict = site.get_sites_dict()
-            for i, j in sites_dict.items():
-                logging.info("Checking " + i)
-                check_site(i, j)
-            time.sleep(1)
+    if is_running:
+        sites_dict = site.get_sites_dict()
+        for i, j in sites_dict.items():
+            logging.info("Checking " + i)
+            check_site(i, j)
+        time.sleep(1)
 
 
 def close_all():
