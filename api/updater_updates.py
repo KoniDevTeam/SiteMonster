@@ -17,9 +17,8 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import shutil
 import threading
-import logging
+from logapi import logging_daemon as logging
 from zipfile import ZipFile
 
 import requests

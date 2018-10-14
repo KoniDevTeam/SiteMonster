@@ -24,7 +24,7 @@ from gui.ui.SiteSettings import SiteSettings
 from api.gui import *
 from api import sites
 from app import site
-import logging as log
+from logapi import logging as log
 
 
 class SiteMonitor(QtWidgets.QMainWindow, monitor.Ui_MainWindow):

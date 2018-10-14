@@ -22,7 +22,7 @@ import wave
 import os
 import sys
 import platform
-import logging
+from logapi import logging
 
 import pyaudio
 from PyQt5 import Qt
@@ -31,27 +31,12 @@ import appinfo
 from api import osinfo, files
 
 
-def send_old_windows_notification(message: str):
-    """Show tray popup on old windows."""
-
-    logging.debug('Sending olf windows tray notification')
-
-    app = Qt.QApplication(sys.argv)
-    systemtray_icon = None
-    if appinfo.APP_ICON is not None and open(appinfo.APP_ICON):
-        systemtray_icon = Qt.QSystemTrayIcon(Qt.QIcon(appinfo.APP_ICON))
-    else:
-        systemtray_icon = Qt.QSystemTrayIcon()
-    systemtray_icon.show()
-    systemtray_icon.showMessage(appinfo.APP_NAME, message)
-
-
 def send_windows_notification(message: str):
     """Send windows 10 toast notification."""
 
     logging.debug('Sending windows 10 toast notification')
 
-    if not osinfo.is_win10():
+    if not osinfo.is_win():
         logging.error('Trying to send win10 notification not from win10!')
         raise OSError('Windows toast notifications can be sent only from Windows 10!')
 
@@ -100,10 +85,8 @@ def send_notification(message):
 
     logging.info('Sending notification')
 
-    if osinfo.is_win10():
+    if osinfo.is_win():
         send_windows_notification(message)
-    elif osinfo.is_win():
-        send_old_windows_notification(message)
     elif osinfo.is_linux():
         send_linux_notification(message)
     elif osinfo.is_mac_os():

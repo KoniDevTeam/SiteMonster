@@ -17,19 +17,16 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
-import logging
+from logapi import logging_updater as logging
 
 from PyQt5.QtWidgets import QApplication
 
 from gui.update_tool import UpdateToolWindow
-from app import logger
 
 if __name__ == '__main__':
-    logger.init_log('updater')
-    logger.log_pc_info()
-    app = QApplication(sys.argv)
-    updater_window = UpdateToolWindow(app.primaryScreen().size())
+        app = QApplication(sys.argv)
+        updater_window = UpdateToolWindow(app.primaryScreen().size())
 
-    logging.info('Starting updater')
+        logging.info('Starting updater')
 
-    app.exec_()
+        app.exec_()
