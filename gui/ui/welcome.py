@@ -15,15 +15,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'gui/ui/welcome.ui'
-#
-# Created by: PyQt5 UI code generator 5.10.1
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -124,9 +118,9 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.welcome_header.setText(_translate("MainWindow", "Welcome to SiteMonster!"))
-        self.welcome_title.setText(_translate("MainWindow", "This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)"))
+        self.welcome_title.setText(_translate("MainWindow",
+                                              "This app will notify you about any your server state. And it can make a loud alarm if something went wrong :)"))
         self.label_2.setText(_translate("MainWindow", "Let\'s start using it\n"
-"and make some noise!"))
+                                                      "and make some noise!"))
         self.start_btn.setText(_translate("MainWindow", "Start"))
         self.quit_btn.setText(_translate("MainWindow", "quit"))
-

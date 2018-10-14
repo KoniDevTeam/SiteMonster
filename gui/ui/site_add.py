@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'gui/ui/addsite.ui'
-#
-# Created by: PyQt5 UI code generator 5.10.1
-#
-# WARNING! All changes made in this file will be lost!
-
 # Copyright (C) 2018 Koni Dev Team, All Rights Reserved
 # https://github.com/KoniDevTeam/SiteMonster/
 #
@@ -25,6 +17,7 @@
 # along with Site Monster.  If not, see <https://www.gnu.org/licenses/>.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
