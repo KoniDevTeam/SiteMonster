@@ -19,5 +19,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add your websites
 - Get notification when your website is down
 
-[Unreleased]: https://github.com/KoniDevTeam/SiteMonster/compare/master...develop
-[1.0.1]: https://github.com/KoniDevTeam/SiteMonster/compare/v1.0...v1.0.1
+[Unreleased]: https://github.com/KoniDevTeam/SiteMonsterPython/compare/master...develop
+[1.0.1]: https://github.com/KoniDevTeam/SiteMonsterPython/compare/v1.0...v1.0.1
